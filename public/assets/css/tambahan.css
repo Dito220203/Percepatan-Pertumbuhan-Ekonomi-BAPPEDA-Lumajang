@@ -1,0 +1,20 @@
+.multi-item-renja {
+            padding: 0 !important;
+            margin: 0 !important;
+            vertical-align: top;
+        }
+
+        .multi-item-renja>div {
+            padding: 8px 12px;
+            white-space: normal;
+        }
+
+        .multi-item-renja>div:not(:last-child) {
+            /* GANTI WARNA DI SINI */
+            border-bottom: 1px solid #cccccc;
+        }
+
+        .highlight-manual-renja {
+            background-color: #fff3cd !important;
+            /* kuning */
+        }
