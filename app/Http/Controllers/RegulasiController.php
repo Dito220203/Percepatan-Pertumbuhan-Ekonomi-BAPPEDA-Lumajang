@@ -17,7 +17,7 @@ class RegulasiController extends Controller
         // Hilangkan search dan pagination
         $regulasi = Regulasi::all();
 
-        return view('admin.Regulasi.index', compact('regulasi'));
+        return view('admin.regulasi.index', compact('regulasi'));
     }
 
 
@@ -27,7 +27,7 @@ class RegulasiController extends Controller
      */
     public function create()
     {
-        return view('admin.Regulasi.create');
+        return view('admin.regulasi.create');
     }
 
     /**
@@ -71,7 +71,7 @@ class RegulasiController extends Controller
     public function edit(string $id)
     {
         $regulasi = Regulasi::findOrFail($id);
-        return view('admin.Regulasi.edit', compact('regulasi'));
+        return view('admin.regulasi.update', compact('regulasi'));
     }
 
     /**

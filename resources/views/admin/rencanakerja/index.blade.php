@@ -129,9 +129,60 @@
             </div>
         </div>
     </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    {{-- --- aksi buka kunci --- --}}
+                    @if (Auth::guard('pengguna')->user()->level === 'Super Admin' && isset($allOpds) && $allOpds->isNotEmpty())
+                        <div class="card-body pt-3">
+                            <h5 class="card-title" style="padding: 0 !important; margin-bottom: 5px;">Aksi Kunci
+                                Data per OPD</h5>
+                            <form action="{{ route('renja.bulk-lock') }}" method="POST" id="bulk-lock-form">
+                                @csrf
+                                @method('PUT')
+                                <div class="row g-2 align-items-end">
+                                    {{-- Dropdown Pilih OPD --}}
+                                    <div class="col-md-5">
+                                        <label for="opd_id_filter" class="form-label">Perangkat Daerah</label>
+                                        <select name="opd_id" id="opd_id_filter" class="form-select form-select-sm"
+                                            required>
+                                            <option value="" selected disabled>-- Pilih Perangkat Daerah --
+                                            </option>
+                                            @foreach ($allOpds as $opd)
+                                                <option value="{{ $opd->id }}">{{ $opd->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    {{-- Dropdown Pilih Aksi --}}
+                                    <div class="col-md-4">
+                                        <label for="action_filter" class="form-label">Aksi</label>
+                                        <select name="action" id="action_filter" class="form-select form-select-sm"
+                                            required>
+                                            <option value="" selected disabled>-- Pilih Aksi --</option>
+                                            <option value="lock">Kunci Semua Data</option>
+                                            <option value="unlock">Buka Semua Kunci</option>
+                                        </select>
+                                    </div>
+
+                                    {{-- Tombol Terapkan --}}
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-danger btn-sm w-100">
+                                            <i class="fas fa-play me-1"></i> Terapkan Aksi
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
@@ -206,8 +257,8 @@
 
                                 <tbody id="dataTabelBody">
                                     @foreach ($rencana as $data)
-                                         <tr id="row-{{ $data->id }}"
-                                                    class="{{ $data->input === 'manual' ? 'highlight-manual-renja' : '' }}">
+                                        <tr id="row-{{ $data->id }}"
+                                            class="{{ $data->input === 'manual' ? 'highlight-manual-renja' : '' }}">
 
                                             <td class="text-center">
                                                 {{ $loop->iteration }}
@@ -264,41 +315,56 @@
                                             <td class="text-sm font-weight-bold mb-0">{{ $data->keterangan ?? '-' }}</td>
                                             <td class="text-center text-sm font-weight-bold mb-0">
                                                 <div class="d-flex justify-content-center gap-1">
-                                                        @if (Auth::guard('pengguna')->user()->level === 'Super Admin')
-                                                         <button
-                                                                    class="btn btn-sm {{ $data->status == 'Valid' ? 'btn-warning' : 'btn-success' }}"
-                                                                    onclick="updateStatus('{{ $data->id }}', '{{ $data->status }}')">
-                                                                    @if ($data->status == 'Valid')
-                                                                        Batalkan
-                                                                    @else
-                                                                        Validasi
-                                                                    @endif
-                                                                </button>
+                                                    @if (Auth::guard('pengguna')->user()->level === 'Super Admin')
+                                                        <button
+                                                            class="btn btn-sm {{ $data->status == 'Valid' ? 'btn-warning' : 'btn-success' }}"
+                                                            onclick="updateStatus('{{ $data->id }}', '{{ $data->status }}')">
+                                                            @if ($data->status == 'Valid')
+                                                                Batalkan
+                                                            @else
+                                                                Validasi
+                                                            @endif
+                                                        </button>
 
-                                                                <form id="form-status-{{ $data->id }}"
-                                                                    action="{{ route('rencana.validasi', $data->id) }}"
-                                                                    method="POST" style="display:none;">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <input type="hidden" name="status" value="">
-                                                                </form>
-                                                                  @endif
-                                                        <a href="{{ route('rencana.edit', $data->id) }}"
-                                                            class="btn btn-primary" title="Edit">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </a>
-                                                        <form id="formDelete-{{ $data->id }}"
-                                                            action="{{ route('rencana.delete', $data->id) }}"
-                                                            method="POST" style="display:inline;">
+                                                        <form id="form-status-{{ $data->id }}"
+                                                            action="{{ route('rencana.validasi', $data->id) }}"
+                                                            method="POST" style="display:none;">
                                                             @csrf
-                                                            @method('DELETE')
-                                                            <button type="button" class="btn btn-danger"
-                                                                onclick="confirmDelete('{{ $data->id }}')">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </button>
+                                                            @method('PUT')
+                                                            <input type="hidden" name="status" value="">
                                                         </form>
-                                                    </div>
-                                                </td>
+                                                         @if ($data->is_locked)
+                                                                {{-- Jika terkunci, tombol dinonaktifkan --}}
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    onclick="showLockedAlert()">
+                                                                     <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                            @else
+                                                                {{-- Jika tidak terkunci, tombol berfungsi normal --}}
+                                                                <form action="{{ route('rencana.edit', $data->id) }}"
+                                                                    method="GET" style="display:inline;">
+                                                                    <button class="btn btn-primary">
+                                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                                    </button>
+                                                                </form>
+                                                            @endif
+                                                            @push('scripts')
+                                                                <script src="{{ asset('js/kunciMonev.js') }}"></script>
+                                                            @endpush
+                                                    @endif
+
+                                                    <form id="formDelete-{{ $data->id }}"
+                                                        action="{{ route('rencana.delete', $data->id) }}" method="POST"
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button" class="btn btn-danger"
+                                                            onclick="confirmDelete('{{ $data->id }}')">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
 
                                         </tr>
                                     @endforeach

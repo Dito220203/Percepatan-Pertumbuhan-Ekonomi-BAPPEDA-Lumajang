@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 //admin
 Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login.get');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.post');
+
 
 Route::middleware(['authadmin', 'noCache'])->group(function () {
     Route::get('/admin', [DasboardAdminController::class, 'index'])->name('dashboard');

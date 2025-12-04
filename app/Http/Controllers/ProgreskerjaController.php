@@ -27,7 +27,7 @@ class ProgreskerjaController extends Controller
     }
 
     $progres = $query->get();
-    return view('admin.ProgresKerja.index', compact('progres'));
+    return view('admin.progres.index', compact('progres'));
 }
 
 

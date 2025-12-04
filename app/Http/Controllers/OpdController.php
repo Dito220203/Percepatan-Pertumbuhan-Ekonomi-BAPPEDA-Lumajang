@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\LogHelper;
 use App\Models\Opd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +49,7 @@ class OpdController extends Controller
 
         Opd::create($validate);
 
-        LogHelper::add('Menambah data OPD');
+
         return redirect()->route('opd')->with('success', 'Data Berhasil Ditambahkan');
     }
 
@@ -99,7 +98,7 @@ class OpdController extends Controller
         'status' => $request->input('e_status'),
     ]);
 
-    LogHelper::add('Mengubah data OPD');
+
     return redirect()->route('opd')->with('success', 'Data Berhasil Diperbarui');
 }
 
@@ -111,7 +110,7 @@ class OpdController extends Controller
         Opd::where('id', $id)->update([
             'delete_at' => '1'
         ]);
-        LogHelper::add('Menghapus data OPD');
+
         return redirect()->route('opd')->with('success', 'Data Berhasil Dihapus');
     }
 }

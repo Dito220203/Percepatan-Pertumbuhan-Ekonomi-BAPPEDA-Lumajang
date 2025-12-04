@@ -16,7 +16,9 @@
     <link id="pagestyle" href="{{ asset('assets/css/soft-ui-dashboard.css?v=1.1.0') }}" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('assets/css/tambahan.css') }}">
-
+<!-- PETA -->
+    <link href="{{ asset('assets/vendor/leaflet/leaflet.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/leaflet/geosearch.css') }}" rel="stylesheet">
 
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 
@@ -32,6 +34,8 @@
         {{-- @include('component.navbar') --}}
 
         @yield('content')
+         {{-- modal ganti pasword --}}
+        @include('admin.GantiPassword.index')
         @include('component.footer')
     </main>
 
@@ -114,6 +118,8 @@
             </div> --}}
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
@@ -122,8 +128,14 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/sweetalert-custom.js') }}"></script>
      <script src="{{ asset('js/updateStatus.js') }}"></script>
+     <script src="{{ asset('assets/js/main.js') }}"></script>
+    {{-- js buatan --}}
+    <script src="{{ asset('js/preview-image.js') }}"></script>
 
     <script src="{{ asset('js/alerthapus2.js') }}"></script>
+       {{-- <script src="{{ asset('js/live-search.js') }}"></script> --}}
+    <script src="{{ asset('js/modalApludMonevDokumentasi.js') }}"></script>
+    <script src="{{ asset('assets/vendor/leaflet/geosearch.umd.js') }}"></script>
     <!-- SweetAlert Success -->
     @if (session('success'))
         <script>
@@ -317,6 +329,9 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    {{-- js buatan --}}
+    <script src="{{ asset('js/preview-image.js') }}"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="{{ asset('assets/js/soft-ui-dashboard.min.js?v=1.1.0') }}"></script>
     @stack('scripts')

@@ -13,6 +13,7 @@
                 </ol>
                 <h6 class="font-weight-bolder mb-0">Monitoring Evaluasi</h6>
             </nav>
+
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
@@ -127,11 +128,63 @@
                     </li>
                 </ul>
             </div>
+
         </div>
     </nav>
+     <!-- End Navbar -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+  {{-- --- aksi buka kunci --- --}}
+                    @if (Auth::guard('pengguna')->user()->level === 'Super Admin' && isset($allOpds) && $allOpds->isNotEmpty())
+                        <div class="card-body pt-3">
+                            <h5 class="card-title" style="padding: 0 !important; margin-bottom: 5px;">Aksi Kunci
+                                Data per OPD</h5>
+                            <form action="{{ route('monev.bulk-lock') }}" method="POST" id="bulk-lock-form">
+                                @csrf
+                                @method('PUT')
+                                <div class="row g-2 align-items-end">
+                                    {{-- Dropdown Pilih OPD --}}
+                                    <div class="col-md-5">
+                                        <label for="opd_id_filter" class="form-label">Perangkat Daerah</label>
+                                        <select name="opd_id" id="opd_id_filter" class="form-select form-select-sm"
+                                            required>
+                                            <option value="" selected disabled>-- Pilih Perangkat Daerah --
+                                            </option>
+                                            @foreach ($allOpds as $opd)
+                                                <option value="{{ $opd->id }}">{{ $opd->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
-    <!-- End Navbar -->
-    <div class="container-fluid py-4">
+                                    {{-- Dropdown Pilih Aksi --}}
+                                    <div class="col-md-4">
+                                        <label for="action_filter" class="form-label">Aksi</label>
+                                        <select name="action" id="action_filter" class="form-select form-select-sm"
+                                            required>
+                                            <option value="" selected disabled>-- Pilih Aksi --</option>
+                                            <option value="lock">Kunci Semua Data</option>
+                                            <option value="unlock">Buka Semua Kunci</option>
+                                        </select>
+                                    </div>
+
+                                    {{-- Tombol Terapkan --}}
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-danger btn-sm w-100">
+                                            <i class="fas fa-play me-1"></i> Terapkan Aksi
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    @endif
+                     </div>
+                     </div>
+                     </div>
+                     </div>
+
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
@@ -146,7 +199,7 @@
                             Tambah Data
                         </a>
                     </div>
-                    {{-- Akhir Modifikasi Tombol --}}
+
 
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -158,46 +211,98 @@
                                 @endphp
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">No</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Strategi</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Rencana Aksi / Aktivitas</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Sub Kegiatan</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kegiatan</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Program</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Lokasi</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Volume Target</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Satuan</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tahun</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Perangkat Daerah</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Anggaran</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Sumber Dana</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dokumen Anggaran</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Realisasi Anggaran</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Volume Realisasi</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Satuan Volume</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Keterangan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                                            No</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Strategi</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Rencana Aksi / Aktivitas</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Sub Kegiatan</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Kegiatan</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Program</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Lokasi</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Volume Target</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Satuan</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Tahun</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Perangkat Daerah</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Anggaran</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Sumber Dana</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Status</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Dokumen Anggaran</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Realisasi Anggaran</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Volume Realisasi</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Satuan Volume</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Keterangan</th>
                                         @if ($adaPesan)
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Catatan</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Catatan</th>
                                         @endif
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dokumentasi</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Aksi</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Dokumentasi</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody id="dataTabelBody">
                                     @foreach ($monev as $data)
                                         <tr id="row-{{ $data->id }}">
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->subprogram->subprogram ?? '-' }}
+                                            <td class="text-sm font-weight-bold mb-0">
+                                                {{ $data->subprogram->subprogram ?? '-' }}
                                             </td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->rencanakerja->rencana_aksi ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->rencanakerja->sub_kegiatan ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->rencanakerja->kegiatan ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->rencanakerja->nama_program ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->rencanakerja->lokasi ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->rencanakerja->volume ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->rencanakerja->satuan ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->rencanakerja->tahun ?? '-' }}</td>
+                                            <td class="text-sm font-weight-bold mb-0">
+                                                {{ $data->rencanakerja->rencana_aksi ?? '-' }}</td>
+                                            <td class="text-sm font-weight-bold mb-0">
+                                                {{ $data->rencanakerja->sub_kegiatan ?? '-' }}</td>
+                                            <td class="text-sm font-weight-bold mb-0">
+                                                {{ $data->rencanakerja->kegiatan ?? '-' }}</td>
+                                            <td class="text-sm font-weight-bold mb-0">
+                                                {{ $data->rencanakerja->nama_program ?? '-' }}</td>
+                                            <td class="text-sm font-weight-bold mb-0">
+                                                {{ $data->rencanakerja->lokasi ?? '-' }}</td>
+                                            <td class="text-sm font-weight-bold mb-0">
+                                                {{ $data->rencanakerja->volume ?? '-' }}</td>
+                                            <td class="text-sm font-weight-bold mb-0">
+                                                {{ $data->rencanakerja->satuan ?? '-' }}</td>
+                                            <td class="text-sm font-weight-bold mb-0">
+                                                {{ $data->rencanakerja->tahun ?? '-' }}</td>
                                             <td class="text-sm font-weight-bold mb-0">
                                                 {{ $data->opd->nama ?? '-' }}
                                             </td>
@@ -209,27 +314,31 @@
                                             {{-- Cek untuk Kolom Anggaran --}}
                                             @if (count($anggarans) > 1)
                                                 {{-- Jika data lebih dari satu, gunakan tampilan multi-baris --}}
-                                                <td class="text-sm font-weight-bold mb-0 multi-item text-center align-middle">
+                                                <td
+                                                    class="text-sm font-weight-bold mb-0 multi-item text-center align-middle">
                                                     @foreach ($anggarans as $anggaran)
                                                         <div>{{ $anggaran ?: '-' }}</div>
                                                     @endforeach
                                                 </td>
                                             @else
                                                 {{-- Jika data hanya satu, tampilkan seperti biasa --}}
-                                                <td class="text-sm font-weight-bold mb-0">{{ $data->anggaran ?: '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->anggaran ?: '-' }}
+                                                </td>
                                             @endif
 
                                             {{-- Cek untuk Kolom Sumber Dana --}}
                                             @if (count($sumberdanas) > 1)
                                                 {{-- Jika data lebih dari satu, gunakan tampilan multi-baris --}}
-                                                <td class="text-sm font-weight-bold mb-0 multi-item text-center align-middle">
+                                                <td
+                                                    class="text-sm font-weight-bold mb-0 multi-item text-center align-middle">
                                                     @foreach ($sumberdanas as $sumber)
                                                         <div>{{ $sumber ?: '-' }}</div>
                                                     @endforeach
                                                 </td>
                                             @else
                                                 {{-- Jika data hanya satu, tampilkan seperti biasa --}}
-                                                <td class="text-sm font-weight-bold mb-0">{{ $data->sumberdana ?: '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->sumberdana ?: '-' }}
+                                                </td>
                                             @endif
 
 
@@ -441,7 +550,7 @@
             </div>
         </div>
     </div>
- {{-- Modal Anggaran dan Sumberdana --}}
+    {{-- Modal Anggaran dan Sumberdana --}}
     <div class="modal fade" id="anggaranModal" tabindex="-1" aria-labelledby="anggaranModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -547,121 +656,375 @@
             </div>
         </div>
     </div>
+    {{-- modal detail --}}
+    @foreach ($monev as $data)
+        <div class="modal fade" id="ModalDetailProduk{{ $data->id }}" tabindex="-1"
+            aria-labelledby="DetailLabel{{ $data->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-super-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header card-dashboard text-white">
+                        <h5 class="modal-title" id="DetailLabel{{ $data->id }}">
+                            <i class="bi bi-info-circle me-2"></i>Detail Monitoring &
+                            Evaluasi
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row g-4">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Script untuk modal anggaran
-            $('#modal-anggaran').on('input', function(e) {
-                let value = this.value.replace(/\D/g, '');
-                if (value) {
-                    this.value = 'Rp. ' + parseInt(value).toLocaleString('id-ID');
-                } else {
-                    this.value = '';
-                }
+                            <div class="col-md-6">
+                                <div class="keterangan-panjang">
+                                    <h6 class="mb-3 text-hijau-kustom fw-bold"><i class="bi bi-list   me-2"></i>Detail
+                                        Dokumentasi</h6>
+                                    <div>
+                                        <h6 class="mb-2 text-hijau-kustom fw-bold"><i
+                                                class="bi bi-card-text text-hijau-kustom me-2"></i>Keterangan
+                                        </h6>
+
+                                        <div class="keterangan-box">
+                                            <p>
+                                                @if ($data->fotoProgres->isNotEmpty())
+                                                    {{ $data->fotoProgres->first()->deskripsi ?: 'Tidak ada uraian.' }}
+                                                @else
+                                                    <span class="text-hijau-kustom fst-italic">Tidak
+                                                        ada uraian</span>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <h6 class="mb-3 text-hijau-kustom fw-bold"><i
+                                            class="bi bi-geo-alt-fill me-2"></i>Lokasi
+                                        Peta</h6>
+                                    @if ($data->map && $data->map->latitude && $data->map->longitude)
+                                        <div id="detailMap{{ $data->id }}" class="peta-container rounded shadow-sm"
+                                            data-latitude="{{ $data->map->latitude }}"
+                                            data-longitude="{{ $data->map->longitude }}">
+                                        </div>
+                                    @else
+                                        <div class="alert alert-light text-hijau-kustom placeholder-container">
+                                            <i class="bi bi-map text-hijau-kustom placeholder-icon"></i>
+                                            <p class="mb-0 mt-3 text-hijau-kustom">Lokasi belum
+                                                ditandai</p>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h6 class="mb-3 text-hijau-kustom fw-bold"><i
+                                        class="bi bi-images text-hijau-kustom me-2"></i>Dokumentasi
+                                    Foto</h6>
+                                <div class="foto-container-scrollable">
+                                    @if ($data->fotoProgres->isNotEmpty())
+                                        <div class="row g-3">
+                                            @foreach ($data->fotoProgres as $foto)
+                                                <div class="col-12">
+                                                    <a href="{{ asset('storage/' . $foto->foto) }}" target="_blank"
+                                                        class="d-block hover-effect">
+                                                        <img src="{{ asset('storage/' . $foto->foto) }}"
+                                                            alt="Foto Progres" class="galeri-foto-item">
+                                                    </a>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <div class="alert alert-light text-center m-0 placeholder-container">
+                                            <i class="bi bi-image text-hijau-kustom placeholder-icon"></i>
+                                            <p class="mb-0 mt-2 text-hijau-kustom">Belum ada foto
+                                            </p>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle me-2"></i>Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    {{-- modal aplud --}}
+    <div class="modal fade" id="uploadFotoModal" tabindex="-1" aria-labelledby="uploadFotoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <form id="uploadFotoForm" method="POST" action="{{ route('foto-progres.store') }}"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="monev_id" id="monev_id_input">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="uploadFotoModalLabel">Upload Foto Dokumentasi & Lokasi
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="dropZone" class="drop-zone mb-3">
+                            <div class="drop-zone-content">
+                                <i class="bi bi-cloud-arrow-up"></i>
+                                <p class="mb-1"><strong>Upload gambar progres</strong></p>
+                                <p class="text-muted small">Drag & drop atau klik (JPG, PNG, Maks 2MB)</p>
+                            </div>
+                            <input type="file" id="fileInput" name="foto[]" accept="image/*" multiple
+                                style="display: none;" required>
+                        </div>
+
+                        <div id="previewContainer" class="mb-3">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="deskripsi_input" class="form-label">Uraian</label>
+                            <textarea name="deskripsi" id="deskripsi_input" class="form-control" placeholder="Masukkan keterangan..."
+                                rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tandai Lokasi di Peta</label>
+                            <div id="map" style="height: 300px; width: 100%; border-radius: 8px; z-index: 0;">
+                            </div>
+                            <input type="hidden" name="latitude" id="latitude">
+                            <input type="hidden" name="longitude" id="longitude">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Pesan (satu saja, di luar foreach) -->
+    <div class="modal fade" id="modalPesan" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="formPesan" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="id_monev" id="idMonev">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Kirim Catatan ke Admin Perangkat Daerah
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Catatan</label>
+                            <textarea name="pesan" id="inputPesan" class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @push('scripts')
+        {{-- Script untuk auto-submit filter tahun --}}
+        <script>
+            $(document).ready(function() {
+                $('#tahun-filter').on('change', function() {
+                    $('#filter-form').submit();
+                });
             });
+        </script>
 
+        {{-- Script untuk fungsionalitas MODAL UPLOAD --}}
+        <script>
+            $(document).ready(function() {
+                const dropZone = document.getElementById('dropZone');
+                const fileInput = document.getElementById('fileInput');
+                const previewContainer = document.getElementById('previewContainer');
+                const deskripsiInput = document.getElementById('deskripsi_input');
+                let filesArray = [];
 
-            // Format otomatis untuk input Realisasi Anggaran di modal Triwulan
-            $('#modal-realisasi').on('input', function() {
-                let value = this.value.replace(/\D/g, ''); // hanya angka
-                if (value) {
-                    this.value = 'Rp. ' + parseInt(value).toLocaleString('id-ID');
-                } else {
-                    this.value = '';
-                }
-            });
+                let map;
+                let marker;
+                const defaultLat = -8.1689; // Ganti dengan koordinat default Anda
+                const defaultLng = 113.223;
+                const latInput = $('#latitude');
+                const lngInput = $('#longitude');
 
+                $('#uploadFotoModal').on('show.bs.modal', function(event) {
+                    var button = $(event.relatedTarget);
+                    var monevId = button.data('id');
+                    $(this).find('#monev_id_input').val(monevId);
+                });
 
-            // Script untuk modal data triwulan
-            function updateTriwulanOptions() {
-                $('#modal-triwulan-select option').prop('disabled', false);
-                $('#triwulan-table-body tr').each(function() {
-                    const tw_index = $(this).data('tw');
-                    if (tw_index) {
-                        $('#modal-triwulan-select option[value="' + tw_index + '"]').prop('disabled', true);
+                $('#uploadFotoModal').on('shown.bs.modal', function() {
+                    if (!map) {
+                        map = L.map('map').setView([defaultLat, defaultLng], 13);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; OpenStreetMap'
+                        }).addTo(map);
+                        marker = L.marker([defaultLat, defaultLng], {
+                            draggable: true
+                        }).addTo(map);
+                        latInput.val(defaultLat);
+                        lngInput.val(defaultLng);
+
+                        const searchControl = new GeoSearch.GeoSearchControl({
+                            provider: new GeoSearch.OpenStreetMapProvider(),
+                            style: 'bar',
+                            autoClose: true,
+                            keepResult: true,
+                            searchLabel: 'Cari lokasi...'
+                        });
+                        map.addControl(searchControl);
+
+                        map.on('click', e => {
+                            marker.setLatLng(e.latlng);
+                            latInput.val(e.latlng.lat);
+                            lngInput.val(e.latlng.lng);
+                        });
+
+                        marker.on('dragend', e => {
+                            const pos = e.target.getLatLng();
+                            latInput.val(pos.lat);
+                            lngInput.val(pos.lng);
+                        });
+
+                        map.on('geosearch/showlocation', result => {
+                            const pos = L.latLng(result.location.y, result.location.x);
+                            marker.setLatLng(pos);
+                            latInput.val(result.location.y);
+                            lngInput.val(result.location.x);
+                        });
+                    }
+                    setTimeout(() => map.invalidateSize(), 10);
+                });
+
+                $('#uploadFotoModal').on('hidden.bs.modal', function() {
+                    filesArray = [];
+                    previewContainer.innerHTML = '';
+                    fileInput.value = '';
+                    deskripsiInput.value = '';
+
+                    if (marker) {
+                        const defaultLatLng = L.latLng(defaultLat, defaultLng);
+                        marker.setLatLng(defaultLatLng);
+                        map.setView(defaultLatLng, 13);
+                        latInput.val(defaultLat);
+                        lngInput.val(defaultLng);
                     }
                 });
-                let firstAvailable = $('#modal-triwulan-select option:not(:disabled):first');
-                $('#modal-triwulan-select').val(firstAvailable.val());
-                $('#modal-triwulan-select').trigger('change');
-            }
 
-            updateTriwulanOptions();
+                dropZone.addEventListener('click', () => fileInput.click());
+                dropZone.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    dropZone.classList.add('drag-over');
+                });
+                dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+                dropZone.addEventListener('drop', e => {
+                    e.preventDefault();
+                    dropZone.classList.remove('drag-over');
+                    handleFiles(Array.from(e.dataTransfer.files));
+                });
+                fileInput.addEventListener('change', e => handleFiles(Array.from(e.target.files)));
 
-            $('#modal-triwulan-select').on('change', function() {
-                const selectedTw = $(this).val();
-                const label = (selectedTw >= 3) ? 'PRKA' : 'RKA';
-                $('#dokumen-anggaran-label-suffix').text(label);
-            });
-
-            $('#tambah-triwulan-ke-tabel').on('click', function() {
-                const tw_index = $('#modal-triwulan-select').val();
-                const tw_text = $('#modal-triwulan-select option:selected').text().trim();
-
-                if (!tw_index) {
-                    alert('Silakan pilih Triwulan terlebih dahulu.');
-                    return;
+                function handleFiles(files) {
+                    files.forEach(file => {
+                        if (!file.type.startsWith('image/') || file.size > 2 * 1024 * 1024) {
+                            alert('Hanya file gambar (JPG, PNG) maks 2MB.');
+                            return;
+                        }
+                        filesArray.push({
+                            file: file,
+                            id: Date.now() + Math.random()
+                        });
+                    });
+                    renderPreviews();
                 }
 
-                const dokumen_status = $('input[name="modal_dokumen_anggaran"]:checked').val();
-                const realisasi = $('#modal-realisasi').val();
-                const volume = $('#modal-volume').val();
-                const satuan = $('#modal-satuan').val();
-                const keterangan = $('#modal-keterangan').val();
+                function renderPreviews() {
+                    previewContainer.innerHTML = '';
+                    previewContainer.style.display = 'grid';
+                    previewContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(100px, 1fr))';
+                    previewContainer.style.gap = '10px';
+                    filesArray.forEach(item => {
+                        const reader = new FileReader();
+                        reader.onload = e => {
+                            previewContainer.insertAdjacentHTML('beforeend',
+                                `<div style="position: relative;"><img src="${e.target.result}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 4px;"><button type="button" class="btn btn-danger btn-sm" onclick="removeFile(${item.id})" style="position: absolute; top: 5px; right: 5px; line-height: 1; padding: 2px 5px; border-radius: 50%;">&times;</button></div>`
+                            );
+                        };
+                        reader.readAsDataURL(item.file);
+                    });
+                    updateFileInput();
+                }
 
-                const twRoman = ['I', 'II', 'III', 'IV'][tw_index - 1];
-                const twLabel = tw_index <= 2 ? 'RKA' : 'PRKA';
-                const dokumen_value = `TW ${twRoman} | ${twLabel} | ${dokumen_status}`;
-
-                const uniqueId = 'tw-row-dynamic-' + new Date().getTime();
-
-                // =============================================================
-                // PERUBAHAN JAVASCRIPT UNTUK TAMPILAN DATA BARU
-                // =============================================================
-                const dokumenDisplayText = `<strong>${twLabel} = ${dokumen_status}</strong>`;
-
-                const tableRow = `
-                    <tr id="${uniqueId}" data-tw="${tw_index}">
-                        <td class="text-center"><strong>${tw_text}</strong></td>
-                        <td class="text-center">${dokumenDisplayText}</td>
-                        <td class="text-center">${realisasi || '-'}</td>
-                        <td class="text-center">${volume || '-'}</td>
-                        <td class="text-center">${satuan || '-'}</td>
-                        <td>${keterangan || '-'}</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-danger btn-sm hapus-triwulan-row" data-target="hidden-${uniqueId}">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-
-                const hiddenInputs = `
-                    <div id="hidden-${uniqueId}">
-                        <input type="hidden" name="dokumen_anggaran[${tw_index}]" value="${dokumen_value}">
-                        <input type="hidden" name="realisasi[${tw_index}]" value="${realisasi}">
-                        <input type="hidden" name="volumeTarget[${tw_index}]" value="${volume}">
-                        <input type="hidden" name="satuan_realisasi[${tw_index}]" value="${satuan}">
-                        <input type="hidden" name="uraian[${tw_index}]" value="${keterangan}">
-                    </div>
-                `;
-
-                $('#triwulan-table-body').append(tableRow);
-                $('#hidden-triwulan-inputs').append(hiddenInputs);
-
-                $('#modal-triwulan-form')[0].reset();
-                $('#triwulanModal').modal('hide');
-                updateTriwulanOptions();
+                function updateFileInput() {
+                    const dt = new DataTransfer();
+                    filesArray.forEach(item => dt.items.add(item.file));
+                    fileInput.files = dt.files;
+                }
+                window.removeFile = id => {
+                    filesArray = filesArray.filter(item => item.id != id);
+                    renderPreviews();
+                };
             });
+        </script>
 
-            $('#triwulan-table-body').on('click', '.hapus-triwulan-row', function() {
-                const targetId = $(this).data('target');
-                $(this).closest('tr').remove();
-                $('#' + targetId).remove();
-                updateTriwulanOptions();
+        {{-- Script untuk fungsionalitas MODAL DETAIL --}}
+        <script>
+            document.addEventListener('shown.bs.modal', function(event) {
+                const modal = event.target;
+                const mapContainer = modal.querySelector('.peta-container');
+                if (!mapContainer || mapContainer._leaflet_id) return;
+
+                const lat = mapContainer.dataset.latitude;
+                const lng = mapContainer.dataset.longitude;
+                const mapId = mapContainer.id;
+
+                const detailMap = L.map(mapId, {
+                    center: [lat, lng],
+                    zoom: 15,
+                    scrollWheelZoom: false,
+                    dragging: false,
+                    zoomControl: true
+                });
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap'
+                }).addTo(detailMap);
+                L.marker([lat, lng]).addTo(detailMap);
+
+                setTimeout(() => detailMap.invalidateSize(), 200);
             });
-        });
-    </script>
+        </script>
+        {{-- Script untuk fungsionalitas MODAL PESAN --}}
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var modalPesan = document.getElementById('modalPesan');
+                modalPesan.addEventListener('show.bs.modal', function(event) {
+                    var button = event.relatedTarget;
+                    var idMonev = button.getAttribute('data-id');
+                    var pesan = button.getAttribute('data-pesan') || '';
+
+                    // isi hidden input
+                    modalPesan.querySelector('#idMonev').value = idMonev;
+
+                    // isi textarea dengan pesan lama (kalau ada)
+                    modalPesan.querySelector('#inputPesan').value = pesan;
+
+                    // set action form ke route updatePesan
+                    var form = modalPesan.querySelector('#formPesan');
+                    form.action = "/monev/" + idMonev + "/pesan";
+                });
+            });
+        </script>
+    @endpush
+
 @endsection
-
