@@ -9,14 +9,24 @@
     <title>
         percepatan pertumbuhan ekonomi
     </title>
+
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,800" rel="stylesheet" />
-    <link href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
     <link id="pagestyle" href="{{ asset('assets/css/soft-ui-dashboard.css?v=1.1.0') }}" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="{{ asset('assets/css/tambahan.css') }}">
-<!-- PETA -->
+    <link rel="stylesheet" href="{{ asset('assets/css/tambahan.css') }}">
+    <!-- PETA -->
     <link href="{{ asset('assets/vendor/leaflet/leaflet.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/leaflet/geosearch.css') }}" rel="stylesheet">
 
@@ -25,7 +35,7 @@
 </head>
 
 
-<body class="g-sidenav-show  bg-gray-100">
+<body class="g-sidenav-show bg-gray-100">
 
 
     @include('component.sidebar')
@@ -34,7 +44,7 @@
         {{-- @include('component.navbar') --}}
 
         @yield('content')
-         {{-- modal ganti pasword --}}
+        {{-- modal ganti pasword --}}
         @include('admin.GantiPassword.index')
         @include('component.footer')
     </main>
@@ -127,13 +137,13 @@
     <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/sweetalert-custom.js') }}"></script>
-     <script src="{{ asset('js/updateStatus.js') }}"></script>
-     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('js/updateStatus.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
     {{-- js buatan --}}
     <script src="{{ asset('js/preview-image.js') }}"></script>
 
     <script src="{{ asset('js/alerthapus2.js') }}"></script>
-       {{-- <script src="{{ asset('js/live-search.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/live-search.js') }}"></script> --}}
     <script src="{{ asset('js/modalApludMonevDokumentasi.js') }}"></script>
     <script src="{{ asset('assets/vendor/leaflet/geosearch.umd.js') }}"></script>
     <!-- SweetAlert Success -->
