@@ -29,8 +29,14 @@
     <!-- PETA -->
     <link href="{{ asset('assets/vendor/leaflet/leaflet.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/leaflet/geosearch.css') }}" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.css" /> --}}
+
+    <link href="{{ asset('assets/vendor/quil1.3.6/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/quil1.3.6/quill.snow.css') }}" rel="stylesheet">
 
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+    <script src="{{ asset('assets/vendor/jquery-3.6.0/jquery-3.6.0.min.js') }}"></script>
+
 
 </head>
 
@@ -128,6 +134,8 @@
             </div> --}}
         </div>
     </div>
+    <script src="{{ asset('assets/vendor/leaflet/leaflet.js') }}"></script>
+    <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
@@ -146,6 +154,8 @@
     {{-- <script src="{{ asset('js/live-search.js') }}"></script> --}}
     <script src="{{ asset('js/modalApludMonevDokumentasi.js') }}"></script>
     <script src="{{ asset('assets/vendor/leaflet/geosearch.umd.js') }}"></script>
+    <script src="{{ asset('js/entries-pagnation-admin.js') }}"></script>
+
     <!-- SweetAlert Success -->
     @if (session('success'))
         <script>
@@ -160,7 +170,7 @@
             session()->forget('success');
         @endphp
     @endif
-    <script>
+    {{-- <script>
         var ctx = document.getElementById("chart-bars").getContext("2d");
 
         new Chart(ctx, {
@@ -338,8 +348,8 @@
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
-    </script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+    </script> --}}
+
     {{-- js buatan --}}
     <script src="{{ asset('js/preview-image.js') }}"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>

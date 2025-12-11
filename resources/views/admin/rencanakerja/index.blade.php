@@ -188,14 +188,17 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                         <h6>Tabel Rencana Kerja</h6>
-                        {{-- <a href="{{ route('rencanaAksi.export.excel', request()->query()) }}" class="btn btn-success btn-sm mb-0">
-                            <i class="fa-solid fa-file-excel me-1"></i>
-                            Export Excel
-                        </a> --}}
-                        <a href="{{ route('rencana.create') }}" class="btn btn-primary btn-sm mb-0">
-                            <i class="fa-solid fa-plus me-1"></i>
-                            Tambah Data
-                        </a>
+                        {{-- BARU --}}
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('rencana.export.excel', request()->query()) }}"
+                                class="btn btn-success btn-sm mb-0">
+                                <i class="fa-solid fa-file-excel"></i> Export Excel
+                            </a>
+                            <a href="{{ route('rencana.create') }}" class="btn btn-primary btn-sm mb-0">
+                                <i class="fa-solid fa-plus me-1"></i>
+                                Tambah Data
+                            </a>
+                        </div>
                     </div>
                     {{-- Akhir Modifikasi Tombol --}}
 
@@ -333,24 +336,24 @@
                                                             @method('PUT')
                                                             <input type="hidden" name="status" value="">
                                                         </form>
-                                                         @if ($data->is_locked)
-                                                                {{-- Jika terkunci, tombol dinonaktifkan --}}
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    onclick="showLockedAlert()">
-                                                                     <i class="fa-solid fa-pen-to-square"></i>
+                                                        @if ($data->is_locked)
+                                                            {{-- Jika terkunci, tombol dinonaktifkan --}}
+                                                            <button type="button" class="btn btn-secondary"
+                                                                onclick="showLockedAlert()">
+                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                            </button>
+                                                        @else
+                                                            {{-- Jika tidak terkunci, tombol berfungsi normal --}}
+                                                            <form action="{{ route('rencana.edit', $data->id) }}"
+                                                                method="GET" style="display:inline;">
+                                                                <button class="btn btn-primary">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
                                                                 </button>
-                                                            @else
-                                                                {{-- Jika tidak terkunci, tombol berfungsi normal --}}
-                                                                <form action="{{ route('rencana.edit', $data->id) }}"
-                                                                    method="GET" style="display:inline;">
-                                                                    <button class="btn btn-primary">
-                                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                                    </button>
-                                                                </form>
-                                                            @endif
-                                                            @push('scripts')
-                                                                <script src="{{ asset('js/kunciMonev.js') }}"></script>
-                                                            @endpush
+                                                            </form>
+                                                        @endif
+                                                        @push('scripts')
+                                                            <script src="{{ asset('js/kunciMonev.js') }}"></script>
+                                                        @endpush
                                                     @endif
 
                                                     <form id="formDelete-{{ $data->id }}"

@@ -214,6 +214,131 @@
                                         @endforeach
                                     </tbody>
                             </table>
+                              @foreach ($progres as $data)
+                                    <div class="modal fade" id="detailModal{{ $data->id }}" tabindex="-1"
+                                        aria-labelledby="detailModalLabel{{ $data->id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-super-xl modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header card-dashboard text-white">
+                                                    <h5 class="modal-title" id="detailModalLabel{{ $data->id }}">
+                                                        <i class="bi bi-info-circle me-2"></i>Detail Progres
+                                                    </h5>
+                                                    <button type="button" class="btn-close btn-close-white"
+                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body text-hijau-kustom">
+                                                    <div class="row g-4">
+
+                                                        <div class="col-md-6">
+                                                            <div>
+                                                                <h6 class="mb-3  fw-bold"><i
+                                                                        class="bi bi-list-ul  me-2"></i>Informasi
+                                                                    Detail</h6>
+                                                                <div class="table-wrapper ">
+                                                                    <table class="table table-hover  mb-0">
+                                                                        <tr>
+                                                                            <th class="bg-light text-hijau-kustom th-detail-lebar"><i
+                                                                                    class="bi bi-clipboard-check me-2"></i>Rencana
+                                                                                Aksi</th>
+                                                                            <td class="fw-medium text-hijau-kustom">
+                                                                                {{ $data->monev?->rencanakerja?->rencana_aksi ?? '-' }}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th class="bg-light  text-hijau-kustom"><i
+                                                                                    class="bi bi-calendar me-2"></i>Tahun
+                                                                            </th>
+                                                                            <td class="text-hijau-kustom">{{ $data->monev->tahun ?? '-' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th class="bg-light  text-hijau-kustom"><i
+                                                                                    class="bi bi-flag me-2"></i>Status</th>
+                                                                            <td><span
+                                                                                    class="badge {{ $data->status === 'Valid' ? 'bg-success' : 'bg-secondary' }}">{{ $data->status }}</span>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <th class="bg-light text-hijau-kustom"><i
+                                                                                    class="bi bi-card-text me-2"></i>Uraian
+                                                                            </th>
+                                                                            <td>
+                                                                                <div class="keterangan-panjang text-hijau-kustom">
+                                                                                    @if ($data->monev && $data->monev->fotoProgres->isNotEmpty())
+                                                                                        {{ $data->monev->fotoProgres->first()->deskripsi ?? 'Tidak ada uraian.' }}
+                                                                                    @else
+                                                                                        <span
+                                                                                            class="text-muted fst- text-hijau-kustom">Tidak
+                                                                                            ada uraian</span>
+                                                                                    @endif
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="mt-4">
+                                                                <h6 class="mb-3 fw-bold text-hijau-kustom"><i
+                                                                        class="bi bi-geo-alt-fill  me-2"></i>Lokasi
+                                                                    Peta</h6>
+                                                                @if ($data->monev && $data->monev->map)
+                                                                    <div id="detailMapProgres{{ $data->id }}"
+                                                                        class="peta-container rounded shadow-sm text-hijau-kustom"
+                                                                        data-latitude="{{ $data->monev->map->latitude }}"
+                                                                        data-longitude="{{ $data->monev->map->longitude }}">
+                                                                    </div>
+                                                                @else
+                                                                    <div class="alert alert-light placeholder-container text-hijau-kustom">
+                                                                        <i class="bi bi-map  text-hijau-kustom placeholder-icon"></i>
+                                                                        <p class="mb-0 mt-3 ">Lokasi belum
+                                                                            ditandai</p>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <h6 class="mb-3 fw- text-hijau-kustom"><i
+                                                                    class="bi bi-images me-2"></i>Dokumentasi
+                                                                Foto</h6>
+                                                            <div class="foto-container-scrollable text-hijau-kustom">
+                                                                @if ($data->monev && $data->monev->fotoProgres->isNotEmpty())
+                                                                    <div class="row g-3">
+                                                                        @foreach ($data->monev->fotoProgres as $foto)
+                                                                            <div class="col-12">
+                                                                                <a href="{{ asset('storage/' . $foto->foto) }}"
+                                                                                    target="_blank"
+                                                                                    class="d-block hover-effect">
+                                                                                    <img src="{{ asset('storage/' . $foto->foto) }}"
+                                                                                        alt="Foto Progres"
+                                                                                        class="galeri-foto-item">
+                                                                                </a>
+                                                                            </div>
+                                                                        @endforeach
+                                                                    </div>
+                                                                @else
+                                                                    <div
+                                                                        class="alert alert-light text-center m-0 placeholder-container text-hijau-kustom">
+                                                                        <i class="bi bi-image text-hijau-kustom placeholder-icon"></i>
+                                                                        <p class="mb-0 mt-2 ">Belum ada foto</p>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer bg-light">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">
+                                                        <i class="bi bi-x-circle me-2"></i>Tutup
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                         </div>
                     </div>
                 </div>
@@ -222,4 +347,44 @@
     </div>
 
 @endsection
+@push('scripts')
+    <script>
+        // Event listener ini akan berjalan untuk SEMUA modal di halaman
+        document.addEventListener('shown.bs.modal', function(event) {
+            // Cari kontainer peta di dalam modal yang BARU SAJA DIBUKA
+            const modal = event.target;
+            const mapContainer = modal.querySelector('.peta-container');
+
+            // Jika tidak ada kontainer peta di modal ini, atau peta sudah dibuat, hentikan
+            if (!mapContainer || mapContainer._leaflet_id) {
+                return;
+            }
+
+            const lat = mapContainer.dataset.latitude;
+            const lng = mapContainer.dataset.longitude;
+            const mapId = mapContainer.id;
+
+            // Inisialisasi peta dalam mode 'view-only'
+            const detailMap = L.map(mapId, {
+                center: [lat, lng],
+                zoom: 15,
+                scrollWheelZoom: false, // Matikan zoom scroll
+                dragging: false, // Matikan drag
+                zoomControl: true // Tampilkan kontrol zoom +/-
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(detailMap);
+
+            // Tambahkan penanda yang tidak bisa digeser
+            L.marker([lat, lng]).addTo(detailMap);
+
+            // Penting: Sesuaikan ukuran peta setelah modal tampil
+            setTimeout(function() {
+                detailMap.invalidateSize();
+            }, 200);
+        });
+    </script>
+@endpush
 

@@ -9,8 +9,9 @@
     <hr class="horizontal dark mt-0">
     {{-- <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main"> --}}
       <ul class="navbar-nav">
+
         <li class="nav-item">
-          <a class="nav-link  active" href="{{route('dashboard')}}">
+          <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{route('dashboard')}}" wire:navigate>
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
@@ -29,8 +30,9 @@
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('subprogram')}}">
+          <a class="nav-link {{ request()->routeIs('subprogram') ? 'active' : '' }}" href="{{route('subprogram')}}" wire:navigate>
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
@@ -49,8 +51,9 @@
             <span class="nav-link-text ms-1">Strategi</span>
           </a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('rencana6tahun')}}">
+          <a class="nav-link {{ request()->routeIs('rencana6tahun') ? 'active' : '' }}" href="{{route('rencana6tahun')}}" wire:navigate>
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>credit-card</title>
@@ -69,8 +72,9 @@
             <span class="nav-link-text ms-1">Rencana Aksi</span>
           </a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('rencanakerja')}}">
+            <a class="nav-link {{ request()->routeIs('rencanakerja') ? 'active' : '' }}" href="{{route('rencanakerja')}}" wire:navigate>
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>box-3d-50</title>
@@ -90,8 +94,9 @@
             <span class="nav-link-text ms-1">Rencana Kerja</span>
           </a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('monev')}}">
+         <a class="nav-link {{ request()->routeIs('monev') ? 'active' : '' }}" href="{{route('monev')}}" wire:navigate>
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>settings</title>
@@ -111,8 +116,9 @@
             <span class="nav-link-text ms-1">Monitoring Evaluasi</span>
           </a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('progres')}}">
+           <a class="nav-link {{ request()->routeIs('progres') ? 'active' : '' }}" href="{{route('progres')}}" wire:navigate>
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>settings</title>
@@ -132,8 +138,9 @@
             <span class="nav-link-text ms-1">Progres Kegiatan</span>
           </a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('regulasi')}}">
+           <a class="nav-link {{ request()->routeIs('regulasi') ? 'active' : '' }}" href="{{route('regulasi')}}" wire:navigate>
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>settings</title>
@@ -153,8 +160,9 @@
             <span class="nav-link-text ms-1">Regulasi</span>
           </a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('pengguna')}}">
+           <a class="nav-link {{ request()->routeIs('pengguna') ? 'active' : '' }}" href="{{route('pengguna')}}" wire:navigate>
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>settings</title>
@@ -174,8 +182,9 @@
             <span class="nav-link-text ms-1">Pengguna</span>
           </a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('opd')}}">
+           <a class="nav-link {{ request()->routeIs('opd') ? 'active' : '' }}" href="{{route('opd')}}" wire:navigate>
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>settings</title>
@@ -195,6 +204,7 @@
             <span class="nav-link-text ms-1">Opd</span>
           </a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link collapsed"  data-bs-target="#modalGantiPassword" data-bs-toggle="modal">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -217,8 +227,8 @@
           </a>
         </li>
 
-         <li class="nav-item">
-          <a class="nav-link  " href="{{route('logout')}}">
+        <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('logout') ? 'active' : '' }}" href="{{route('logout')}}" wire:navigate>
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>settings</title>

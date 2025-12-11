@@ -16,8 +16,8 @@
          <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
              <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                  <div class="input-group">
-                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                     <input type="text" class="form-control" placeholder="Type here...">
+
+                     <input    id="liveSearchInput"  type="text" class="form-control" placeholder="Type here...">
                  </div>
              </div>
              <ul class="navbar-nav  justify-content-end">
@@ -146,7 +146,7 @@
 
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                            <table  id="dataTable" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">No

@@ -135,17 +135,21 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
-                    <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                        <h6>Tabel Rencana Aksi</h6>
-                        {{-- <a href="{{ route('rencanaAksi.export.excel', request()->query()) }}" class="btn btn-success btn-sm mb-0">
-                            <i class="fa-solid fa-file-excel me-1"></i>
-                            Export Excel
-                        </a> --}}
-                        <a href="{{ route('rencanaAksi.create') }}" class="btn btn-primary btn-sm mb-0">
-                            <i class="fa-solid fa-plus me-1"></i>
-                            Tambah Data
-                        </a>
-                    </div>
+                   <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+    <h6>Tabel Rencana Aksi</h6>
+
+    <div class="d-flex gap-2">
+        <a href="{{ route('rencanaAksi.export.excel', request()->query()) }}" class="btn btn-success btn-sm mb-0">
+            <i class="fa-solid fa-file-excel me-1"></i>
+            Export Excel
+        </a>
+        <a href="{{ route('rencanaAksi.create') }}" class="btn btn-primary btn-sm mb-0">
+            <i class="fa-solid fa-plus me-1"></i>
+            Tambah Data
+        </a>
+    </div>
+</div>
+
                     {{-- Akhir Modifikasi Tombol --}}
 
                     <div class="card-body px-0 pt-0 pb-2">
