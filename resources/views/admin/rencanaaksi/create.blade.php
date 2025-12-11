@@ -67,7 +67,7 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                         <h6 class="text-uppercase">Form Tambah Rencana Aksi</h6>
-                        <a href="#" class="btn btn-secondary btn-sm mb-0">
+                        <a href="{{route('rencana6tahun')}}" class="btn btn-secondary btn-sm mb-0">
                             <i class="fa-solid fa-arrow-left me-1"></i>
                             Kembali ke Tabel
                         </a>

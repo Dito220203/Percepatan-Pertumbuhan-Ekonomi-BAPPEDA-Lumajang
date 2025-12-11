@@ -280,7 +280,7 @@ class MonevController extends Controller
 
         // Buat dan atur PDF
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView(
-            'admin.MonitoringEvaluasi.export',
+            'admin.monev.export',
             $data
         )->setPaper('a4', 'landscape');
 
