@@ -1,4 +1,4 @@
-@extends('component.layout')
+ @extends('component.layout')
 @section('content')
  <!-- Navbar -->
 
@@ -140,9 +140,8 @@
                             <div class="card-body p-3 position-relative">
                                 <div class="row">
                                     <div class="col-8 text-start">
-                                        <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                                            <i class="ni ni-circle-08 text-dark text-gradient text-lg opacity-10"
-                                                aria-hidden="true"></i>
+                                        <div class="icon icon-shape bg-gradient-icon shadow-primary text-center rounded-circle">
+                                            <i class="fa-solid fa-list-check text-lg opacity-10"aria-hidden="true"></i>
                                         </div>
                                         <h5 class="text-white font-weight-bolder mb-0 mt-3">
                                             1600
@@ -176,8 +175,8 @@
                             <div class="card-body p-3 position-relative">
                                 <div class="row">
                                     <div class="col-8 text-start">
-                                        <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                                            <i class="ni ni-active-40 text-dark text-gradient text-lg opacity-10"
+                                        <div class="icon icon-shape  shadow text-center border-radius-2xl">
+                                            <i class="fa-solid fa-briefcase text-lg opacity-10"
                                                 aria-hidden="true"></i>
                                         </div>
                                         <h5 class="text-white font-weight-bolder mb-0 mt-3">
@@ -214,9 +213,10 @@
                             <div class="card-body p-3 position-relative">
                                 <div class="row">
                                     <div class="col-8 text-start">
-                                        <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                                            <i class="ni ni-cart text-dark text-gradient text-lg opacity-10"
+                                        <div class="icon icon-shape  shadow text-center border-radius-2xl">
+                                            <i class="fa-solid fa-magnifying-glass-chart opacity-10"
                                                 aria-hidden="true"></i>
+                                                
                                         </div>
                                         <h5 class="text-white font-weight-bolder mb-0 mt-3">
                                             2300
@@ -250,8 +250,8 @@
                             <div class="card-body p-3 position-relative">
                                 <div class="row">
                                     <div class="col-8 text-start">
-                                        <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                                            <i class="ni ni-like-2 text-dark text-gradient text-lg opacity-10"
+                                        <div class="icon icon-shape  shadow text-center border-radius-2xl">
+                                            <i class="fa-solid fa-bars-progress opacity-10"
                                                 aria-hidden="true"></i>
                                         </div>
                                         <h5 class="text-white font-weight-bolder mb-0 mt-3">

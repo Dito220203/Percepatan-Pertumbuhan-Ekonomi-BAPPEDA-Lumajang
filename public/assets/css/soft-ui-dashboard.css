@@ -24620,6 +24620,59 @@ html {
   color: #fff;
 }
 
+/* modifikasi */
+
+
+    /* ------------------------------------------------ */
+    /* 1. STYLE SAAT MENU AKTIF (ACTIVE)                */
+    /* ------------------------------------------------ */
+    
+    /* Targetkan seluruh baris tombol (nav-link) */
+    .sidenav .nav-link.active {
+        /* Background Orange Gradient */
+        background-image: linear-gradient(310deg, #ea580c 0%, #facc15 100%) !important;
+        /* Shadow agar terlihat timbul (floating) */
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+        /* Warna Teks Tetap Gelap (sesuai request) */
+        color: #344767 !important;
+        font-weight: 600;
+        border-radius: 0.5rem;
+    }
+
+    /* Targetkan Kotak Ikon di dalam menu aktif */
+    .sidenav .nav-link.active .icon {
+        /* Ubah background kotak ikon jadi putih transparan (agar terlihat menyatu) */
+        background-color: rgba(255, 255, 255, 0.2) !important; 
+        background-image: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Targetkan Ikon FontAwesome di dalam menu aktif */
+    .sidenav .nav-link.active .icon i {
+        /* Ikon berubah jadi Putih agar kontras dengan background orange */
+        color: #ffffff !important;
+    }
+
+    /* Pastikan Teks Menu berwarna Gelap */
+    .sidenav .nav-link.active .nav-link-text {
+        color: #344767 !important;
+    }
+
+
+    /* ------------------------------------------------ */
+    /* 2. STYLE SAAT MENU TIDAK AKTIF (DEFAULT)         */
+    /* ------------------------------------------------ */
+    
+    .sidenav .nav-link .icon i {
+        color: #3a416f; /* Warna ikon default (abu tua) */
+        font-size: 14px;
+        transition: color 0.2s ease-in-out;
+    }
+
+
+
+/* modifikasi */
+
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon svg .color-background,
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon svg .color-foreground {
   fill: #fff;
