@@ -137,10 +137,7 @@
                     {{-- Modifikasi: Tombol Tambah Data sekarang memicu modal --}}
                     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                         <h6>Tabel Progres Kerja</h6>
-                        <button type="button" class="btn btn-primary btn-sm mb-0" data-bs-toggle="modal"
-                            data-bs-target="#addDataModal">
-                            <i class="fa fa-plus me-1"></i> Tambah Data
-                        </button>
+
                     </div>
                     {{-- Akhir Modifikasi Tombol --}}
 
