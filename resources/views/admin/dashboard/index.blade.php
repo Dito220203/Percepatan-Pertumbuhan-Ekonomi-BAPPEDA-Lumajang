@@ -141,8 +141,7 @@
                                 <div class="row">
                                     <div class="col-8 text-start">
                                         <div class="icon icon-shape bg-gradient-icon shadow-primary text-center rounded-circle">
-                                            <i class="fas fa-credit-card text-lg opacity-10"
-                                                aria-hidden="true"></i>
+                                            <i class="fa-solid fa-list-check text-lg opacity-10"aria-hidden="true"></i>
                                         </div>
                                         <h5 class="text-white font-weight-bolder mb-0 mt-3">
                                             1600
@@ -177,7 +176,7 @@
                                 <div class="row">
                                     <div class="col-8 text-start">
                                         <div class="icon icon-shape  shadow text-center border-radius-2xl">
-                                            <i class="fas fa-chart-line text-lg opacity-10"
+                                            <i class="fa-solid fa-briefcase text-lg opacity-10"
                                                 aria-hidden="true"></i>
                                         </div>
                                         <h5 class="text-white font-weight-bolder mb-0 mt-3">
@@ -215,7 +214,7 @@
                                 <div class="row">
                                     <div class="col-8 text-start">
                                         <div class="icon icon-shape  shadow text-center border-radius-2xl">
-                                            <i class="fa-solid fa-list-check opacity-10"
+                                            <i class="fa-solid fa-magnifying-glass-chart opacity-10"
                                                 aria-hidden="true"></i>
                                                 
                                         </div>
@@ -252,7 +251,7 @@
                                 <div class="row">
                                     <div class="col-8 text-start">
                                         <div class="icon icon-shape  shadow text-center border-radius-2xl">
-                                            <i class="fa-regular fa-image opacity-10"
+                                            <i class="fa-solid fa-bars-progress opacity-10"
                                                 aria-hidden="true"></i>
                                         </div>
                                         <h5 class="text-white font-weight-bolder mb-0 mt-3">
