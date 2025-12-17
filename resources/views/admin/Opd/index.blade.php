@@ -16,8 +16,8 @@
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
+
+                        <input id="liveSearchInput" type="text" class="form-control" placeholder="Type here...">
                     </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
@@ -137,6 +137,16 @@
                     {{-- Modifikasi: Tombol Tambah Data sekarang memicu modal --}}
                     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                         <h6>Tabel Opd</h6>
+                         <div class="d-flex align-items-center gap-2">
+                            <label for="showEntries">Tampilkan</label>
+                            <select id="showEntries" class="form-select form-select-sm" style="width: auto;">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                            <span>entri</span>
+                        </div>
                       <!-- Tombol Trigger Modal -->
                                 <button type="button" class="btn btn-primary btn-sm mb-0" data-bs-toggle="modal"
                                     data-bs-target="#modalOpd">
@@ -279,6 +289,17 @@
                                     </tbody>
                             </table>
                         </div>
+                         <div class="card-footer py-3">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 text-sm text-secondary" id="paginationInfo"></div>
+
+                            <div class="col-md-6">
+                                <nav class="d-flex justify-content-md-end justify-content-center">
+                                    <div id="paginationControls"></div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
