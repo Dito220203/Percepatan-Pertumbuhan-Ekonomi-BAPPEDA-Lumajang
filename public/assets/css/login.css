@@ -1,0 +1,336 @@
+/* ========================================
+   MODERN LOGIN PAGE STYLES - P2 EKONOMI
+   ======================================== */
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-orange: #FF8C42;
+    --primary-dark: #2C2C2C;
+    --text-light: #FFFFFF;
+    --text-gray: #A0A0A0;
+    --success-green: #4CAF50;
+    --error-red: #FF5252;
+    --border-color: #E0E0E0;
+    --bg-color: #F4F7F6; /* Warna background halaman */
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: var(--primary-dark);
+    background-color: var(--bg-color);
+    /* Opsional: Background pattern halus */
+    background-image: radial-gradient(#FF8C42 0.5px, transparent 0.5px), radial-gradient(#FF8C42 0.5px, #F4F7F6 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    min-height: 100vh;
+}
+
+/* ========================================
+   LOGIN CONTAINER & CARD
+   ======================================== */
+.login-container {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Kartu Tengah */
+.login-card {
+    background: white;
+    width: 100%;
+    max-width: 480px; /* Lebar kartu */
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.6s ease-out;
+    border-top: 5px solid var(--primary-orange); /* Aksen garis oranye di atas */
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   LOGO SECTION (CENTERED)
+   ======================================== */
+.logo-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.logo-section h1 {
+    color: var(--primary-orange); /* Ubah warna jadi oranye agar terlihat di background putih */
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.logo-section .subtitle {
+    color: var(--text-gray);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* ========================================
+   FORM HEADER
+   ======================================== */
+.form-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 4px;
+}
+
+.form-header p {
+    color: var(--text-gray);
+    font-size: 14px;
+}
+
+/* ========================================
+   FORM STYLES
+   ======================================== */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-left: 4px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0 16px;
+    transition: var(--transition);
+}
+
+.input-wrapper:hover {
+    border-color: #C0C0C0;
+}
+
+.input-wrapper.focused {
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 4px rgba(255, 140, 66, 0.1);
+}
+
+.input-wrapper.error {
+    border-color: var(--error-red);
+}
+
+.input-wrapper i {
+    color: var(--text-gray);
+    font-size: 18px;
+    margin-right: 12px;
+    transition: var(--transition);
+}
+
+.input-wrapper.focused i {
+    color: var(--primary-orange);
+}
+
+.input-wrapper input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px 0;
+    font-size: 15px;
+    color: var(--primary-dark);
+    background: transparent;
+    width: 100%;
+}
+
+.input-wrapper input::placeholder {
+    color: #C0C0C0;
+}
+
+.toggle-password {
+    cursor: pointer;
+    margin-right: 0;
+    margin-left: 12px;
+    font-size: 20px;
+}
+
+.toggle-password:hover {
+    color: var(--primary-orange);
+}
+
+.error-message {
+    color: var(--error-red);
+    font-size: 12px;
+    margin-left: 4px;
+    min-height: 18px;
+    display: block;
+}
+
+/* Login Button */
+.btn-login {
+    background: linear-gradient(135deg, var(--primary-orange) 0%, #FF6B35 100%);
+    color: var(--text-light);
+    border: none;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(255, 140, 66, 0.3);
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 140, 66, 0.4);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+.btn-login i {
+    font-size: 18px;
+    transition: var(--transition);
+}
+
+.btn-login:hover i {
+    transform: translateX(4px);
+}
+
+/* Footer Text */
+.footer-text {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.footer-text p {
+    font-size: 12px;
+    color: var(--text-gray);
+}
+
+.footer-text strong {
+    color: var(--primary-dark);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 30px 20px;
+    }
+
+    .logo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .logo-section h1 {
+        font-size: 24px;
+    }
+
+    .form-header h2 {
+        font-size: 22px;
+    }
+}
+
+/* ========================================
+   CUSTOM SWEETALERT STYLES (REVISI)
+   ======================================== */
+
+/* 1. Container & Popup */
+.swal2-container .swal2-popup {
+    border-radius: 24px !important;
+    font-family: 'Inter', sans-serif !important;
+    padding: 30px !important;
+}
+
+/* 2. Judul */
+.swal2-title {
+    color: var(--primary-dark) !important;
+    font-size: 24px !important;
+}
+
+/* 3. Konten Text */
+.swal2-html-container {
+    color: var(--text-gray) !important;
+}
+
+/* 4. LOADING SPINNER (Ini kuncinya) 
+   Kita target langsung class .swal2-loader tanpa basa-basi */
+.swal2-loader {
+    border-color: #FF8C42 transparent #FF8C42 transparent !important;
+}
+
+/* 5. Tombol Confirm (OK) */
+.swal2-styled.swal2-confirm {
+    background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 100%) !important;
+    box-shadow: 0 4px 12px rgba(255, 140, 66, 0.3) !important;
+    border-radius: 12px !important;
+    border: none !important;
+}
+
+.swal2-styled.swal2-confirm:focus {
+    box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.5) !important;
+}
+
+/* 6. Timer Progress Bar */
+.swal2-timer-progress-bar {
+    background: #FF8C42 !important;
+}

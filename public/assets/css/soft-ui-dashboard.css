@@ -24655,7 +24655,7 @@ html {
 
     /* Pastikan Teks Menu berwarna Gelap */
     .sidenav .nav-link.active .nav-link-text {
-        color: #344767 !important;
+        color: #ffff !important;
     }
 
 
