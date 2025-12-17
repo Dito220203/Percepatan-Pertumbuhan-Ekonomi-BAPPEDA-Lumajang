@@ -16,8 +16,8 @@
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
+
+                        <input id="liveSearchInput" type="text" class="form-control" placeholder="Type here...">
                     </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
@@ -137,10 +137,20 @@
                     {{-- Modifikasi: Tombol Tambah Data sekarang memicu modal --}}
                     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                         <h6>Tabel Pengguna</h6>
+                         <div class="d-flex align-items-center gap-2">
+                            <label for="showEntries">Tampilkan</label>
+                            <select id="showEntries" class="form-select form-select-sm" style="width: auto;">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                            <span>entri</span>
+                        </div>
 
-                         <a href="{{ route('pengguna.create') }}" class="btn btn-primary btn-sm mb-0">
-                                    + Tambah Pengguna
-                                </a>
+                        <a href="{{ route('pengguna.create') }}" class="btn btn-primary btn-sm mb-0">
+                            + Tambah Pengguna
+                        </a>
 
                     </div>
                     {{-- Akhir Modifikasi Tombol --}}
@@ -170,39 +180,49 @@
                                 </thead>
 
 
-                                 <tbody id="dataTabelBody">
-                                        @foreach ($pengguna as $data)
-                                            <tr>
-                                                <td class="text-center">{{ $loop->iteration }}</td>
-                                                <td class="text-sm font-weight-bold mb-0">{{ $data->username }}</td>
-                                                <td class="text-sm font-weight-bold mb-0">{{ $data->opd->nama ?? '-' }}</td>
-                                                <td class="text-sm font-weight-bold mb-0">{{ $data->level }}</td>
-                                                <td class="text-center align-middle">
-                                                    <div class="d-flex justify-content-center gap-1">
-                                                        <form action="{{ route('pengguna.edit', $data->id) }}"
-                                                            method="GET">
-                                                            <button class="btn btn-tambah-utama btn-sm">
-                                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                            </button>
-                                                        </form>
-                                                        <form id="formDelete-{{ $data->id }}"
-                                                            action="{{ route('pengguna.destroy', $data->id) }}"
-                                                            method="POST" style="display:inline;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="button" class="btn btn-danger btn-sm"
-                                                                onclick="confirmDelete('{{ $data->id }}')">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </button>
-                                                        </form>
+                                <tbody id="dataTabelBody">
+                                    @foreach ($pengguna as $data)
+                                        <tr>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td class="text-sm font-weight-bold mb-0">{{ $data->username }}</td>
+                                            <td class="text-sm font-weight-bold mb-0">{{ $data->opd->nama ?? '-' }}</td>
+                                            <td class="text-sm font-weight-bold mb-0">{{ $data->level }}</td>
+                                            <td class="text-center align-middle">
+                                                <div class="d-flex justify-content-center gap-1">
+                                                    <form action="{{ route('pengguna.edit', $data->id) }}" method="GET">
+                                                        <button class="btn btn-tambah-utama btn-sm">
+                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                        </button>
+                                                    </form>
+                                                    <form id="formDelete-{{ $data->id }}"
+                                                        action="{{ route('pengguna.destroy', $data->id) }}" method="POST"
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button" class="btn btn-danger btn-sm"
+                                                            onclick="confirmDelete('{{ $data->id }}')">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </form>
 
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
+                         <div class="card-footer py-3">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 text-sm text-secondary" id="paginationInfo"></div>
+
+                            <div class="col-md-6">
+                                <nav class="d-flex justify-content-md-end justify-content-center">
+                                    <div id="paginationControls"></div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>

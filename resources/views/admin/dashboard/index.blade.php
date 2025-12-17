@@ -1,4 +1,4 @@
- @extends('component.layout')
+@extends('component.layout')
 @section('content')
  <!-- Navbar -->
 
@@ -132,221 +132,265 @@
  <!-- End Navbar -->
     <div class="container-fluid py-4">
         <div class="row">
-            <div class="col-lg-6 col-12">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="card">
-                            <span class="mask bg-primary opacity-10 border-radius-lg"></span>
-                            <div class="card-body p-3 position-relative">
-                                <div class="row">
-                                    <div class="col-8 text-start">
-                                        <div class="icon icon-shape bg-gradient-icon shadow-primary text-center rounded-circle">
-                                            <i class="fa-solid fa-list-check text-lg opacity-10"aria-hidden="true"></i>
-                                        </div>
-                                        <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                                            1600
-                                        </h5>
-                                        <span class="text-white text-sm">Rencana Aksi</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="dropdown text-end mb-6">
-                                            <a href="javascript:;" class="cursor-pointer" id="dropdownUsers1"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-ellipsis-h text-white"></i>
-                                            </a>
-                                            <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers1">
-                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
-                                                </li>
-                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
-                                                        action</a></li>
-                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
-                                                        else here</a></li>
-                                            </ul>
-                                        </div>
-                                        <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+55%</p>
-                                    </div>
+            <!-- Card Stats Row -->
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                <div class="card">
+                    <span class="mask bg-primary opacity-10 border-radius-lg"></span>
+                    <div class="card-body p-3 position-relative">
+                        <div class="row">
+                            <div class="col-8 text-start">
+                                <div class="icon icon-shape bg-gradient-icon shadow-primary text-center rounded-circle">
+                                    <i class="fa-solid fa-list-check text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
+                                <h5 class="text-white font-weight-bolder mb-0 mt-3">
+                                    1600
+                                </h5>
+                                <span class="text-white text-sm">Rencana Aksi</span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-12 mt-4 mt-md-0">
-                        <div class="card">
-                            <span class="mask bg-dark opacity-10 border-radius-lg"></span>
-                            <div class="card-body p-3 position-relative">
-                                <div class="row">
-                                    <div class="col-8 text-start">
-                                        <div class="icon icon-shape  shadow text-center border-radius-2xl">
-                                            <i class="fa-solid fa-briefcase text-lg opacity-10"
-                                                aria-hidden="true"></i>
-                                        </div>
-                                        <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                                            357
-                                        </h5>
-                                        <span class="text-white text-sm">Rencana Kerja</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="dropstart text-end mb-6">
-                                            <a href="javascript:;" class="cursor-pointer" id="dropdownUsers2"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-ellipsis-h text-white"></i>
-                                            </a>
-                                            <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers2">
-                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
-                                                </li>
-                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
-                                                        action</a></li>
-                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
-                                                        else here</a></li>
-                                            </ul>
-                                        </div>
-                                        <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+124%</p>
-                                    </div>
+                            <div class="col-4">
+                                <div class="dropdown text-end mb-6">
+                                    <a href="javascript:;" class="cursor-pointer" id="dropdownUsers1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-h text-white"></i>
+                                    </a>
+                                    <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers1">
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
+                                        </li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
+                                                action</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
+                                                else here</a></li>
+                                    </ul>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="card">
-                            <span class="mask bg-dark opacity-10 border-radius-lg"></span>
-                            <div class="card-body p-3 position-relative">
-                                <div class="row">
-                                    <div class="col-8 text-start">
-                                        <div class="icon icon-shape  shadow text-center border-radius-2xl">
-                                            <i class="fa-solid fa-magnifying-glass-chart opacity-10"
-                                                aria-hidden="true"></i>
-                                                
-                                        </div>
-                                        <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                                            2300
-                                        </h5>
-                                        <span class="text-white text-sm">Monitoring Evaluasi</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="dropdown text-end mb-6">
-                                            <a href="javascript:;" class="cursor-pointer" id="dropdownUsers3"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-ellipsis-h text-white"></i>
-                                            </a>
-                                            <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers3">
-                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
-                                                </li>
-                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
-                                                        action</a></li>
-                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
-                                                        else here</a></li>
-                                            </ul>
-                                        </div>
-                                        <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+15%</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-12 mt-4 mt-md-0">
-                        <div class="card">
-                            <span class="mask bg-dark opacity-10 border-radius-lg"></span>
-                            <div class="card-body p-3 position-relative">
-                                <div class="row">
-                                    <div class="col-8 text-start">
-                                        <div class="icon icon-shape  shadow text-center border-radius-2xl">
-                                            <i class="fa-solid fa-bars-progress opacity-10"
-                                                aria-hidden="true"></i>
-                                        </div>
-                                        <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                                            940
-                                        </h5>
-                                        <span class="text-white text-sm">Progres Kerja</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="dropstart text-end mb-6">
-                                            <a href="javascript:;" class="cursor-pointer" id="dropdownUsers4"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-ellipsis-h text-white"></i>
-                                            </a>
-                                            <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers4">
-                                                <li><a class="dropdown-item border-radius-md"
-                                                        href="javascript:;">Action</a></li>
-                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
-                                                        action</a></li>
-                                                <li><a class="dropdown-item border-radius-md"
-                                                        href="javascript:;">Something else here</a></li>
-                                            </ul>
-                                        </div>
-                                        <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+90%</p>
-                                    </div>
-                                </div>
+                                <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+55%</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-12 mt-4 mt-lg-0">
-                <div class="card shadow h-100">
-                    <div class="card-header pb-0 p-3">
-                        <h6 class="mb-0">Reviews</h6>
-                    </div>
-                    <div class="card-body pb-0 p-3">
-                        <ul class="list-group">
-                            <li class="list-group-item border-0 d-flex align-items-center px-0 mb-0">
-                                <div class="w-100">
-                                    <div class="d-flex mb-2">
-                                        <span class="me-2 text-sm font-weight-bold text-dark">Positive Reviews</span>
-                                        <span class="ms-auto text-sm font-weight-bold">80%</span>
-                                    </div>
-                                    <div>
-                                        <div class="progress progress-md">
-                                            <div class="progress-bar bg-primary w-80" role="progressbar"
-                                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
+
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                <div class="card">
+                    <span class="mask bg-dark opacity-10 border-radius-lg"></span>
+                    <div class="card-body p-3 position-relative">
+                        <div class="row">
+                            <div class="col-8 text-start">
+                                <div class="icon icon-shape shadow text-center border-radius-2xl">
+                                    <i class="fa-solid fa-briefcase text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                                <div class="w-100">
-                                    <div class="d-flex mb-2">
-                                        <span class="me-2 text-sm font-weight-bold text-dark">Neutral Reviews</span>
-                                        <span class="ms-auto text-sm font-weight-bold">17%</span>
-                                    </div>
-                                    <div>
-                                        <div class="progress progress-md">
-                                            <div class="progress-bar bg-primary w-10" role="progressbar"
-                                                aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
+                                <h5 class="text-white font-weight-bolder mb-0 mt-3">
+                                    357
+                                </h5>
+                                <span class="text-white text-sm">Rencana Kerja</span>
+                            </div>
+                            <div class="col-4">
+                                <div class="dropstart text-end mb-6">
+                                    <a href="javascript:;" class="cursor-pointer" id="dropdownUsers2"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-h text-white"></i>
+                                    </a>
+                                    <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers2">
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
+                                        </li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
+                                                action</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
+                                                else here</a></li>
+                                    </ul>
                                 </div>
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                                <div class="w-100">
-                                    <div class="d-flex mb-2">
-                                        <span class="me-2 text-sm font-weight-bold text-dark">Negative Reviews</span>
-                                        <span class="ms-auto text-sm font-weight-bold">3%</span>
-                                    </div>
-                                    <div>
-                                        <div class="progress progress-md">
-                                            <div class="progress-bar bg-primary w-5" role="progressbar" aria-valuenow="5"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-footer pt-0 p-3 d-flex align-items-center">
-                        <div class="w-60">
-                            <p class="text-sm">
-                                More than <b>1,500,000</b> developers used Creative Tim's products and over <b>700,000</b>
-                                projects were created.
-                            </p>
+                                <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+124%</p>
+                            </div>
                         </div>
-                        <div class="w-40 text-end">
-                            <a class="btn btn-dark mb-0 text-end" href="javascript:;">View all reviews</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                <div class="card">
+                    <span class="mask bg-info opacity-10 border-radius-lg"></span>
+                    <div class="card-body p-3 position-relative">
+                        <div class="row">
+                            <div class="col-8 text-start">
+                                <div class="icon icon-shape bg-gradient-info shadow-info text-center rounded-circle">
+                                    <i class="fa-solid fa-chart-line text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                                <h5 class="text-white font-weight-bolder mb-0 mt-3">
+                                    892
+                                </h5>
+                                <span class="text-white text-sm">Monitoring Evaluasi</span>
+                            </div>
+                            <div class="col-4">
+                                <div class="dropdown text-end mb-6">
+                                    <a href="javascript:;" class="cursor-pointer" id="dropdownUsers3"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-h text-white"></i>
+                                    </a>
+                                    <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers3">
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
+                                        </li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
+                                                action</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
+                                                else here</a></li>
+                                    </ul>
+                                </div>
+                                <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+78%</p>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                <div class="card">
+                    <span class="mask bg-success opacity-10 border-radius-lg"></span>
+                    <div class="card-body p-3 position-relative">
+                        <div class="row">
+                            <div class="col-8 text-start">
+                                <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                                    <i class="fa-solid fa-tasks text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                                <h5 class="text-white font-weight-bolder mb-0 mt-3">
+                                    1245
+                                </h5>
+                                <span class="text-white text-sm">Progres Kerja</span>
+                            </div>
+                            <div class="col-4">
+                                <div class="dropdown text-end mb-6">
+                                    <a href="javascript:;" class="cursor-pointer" id="dropdownUsers4"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-h text-white"></i>
+                                    </a>
+                                    <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers4">
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
+                                        </li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
+                                                action</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
+                                                else here</a></li>
+                                    </ul>
+                                </div>
+                                <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+92%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <div class="d-flex justify-content-between">
+                            <h6>Progres Kerja</h6>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-outline-primary active">Bulan</button>
+                                <button type="button" class="btn btn-outline-primary">Tahun</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-3">
+                        <canvas id="performanceChart" height="300"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Chart.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(40, 167, 69, 0.4)');
+        gradient.addColorStop(1, 'rgba(40, 167, 69, 0)');
+
+        const performanceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+                datasets: [{
+                    label: 'Progres Kerja',
+                    data: [100, 200, 350, 520, 680, 820, 950, 1050, 1130, 1185, 1220, 1245],
+                    borderColor: 'rgb(40, 167, 69)',
+                    backgroundColor: gradient,
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: 'rgb(40, 167, 69)',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointHoverBackgroundColor: 'rgb(40, 167, 69)',
+                    pointHoverBorderColor: '#fff',
+                    pointHoverBorderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                size: 13
+                            },
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        cornerRadius: 8,
+                        titleFont: {
+                            size: 14
+                        },
+                        bodyFont: {
+                            size: 13
+                        },
+                        displayColors: true,
+                        intersect: false,
+                        mode: 'index'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 12
+                            },
+                            padding: 10
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 12
+                            },
+                            padding: 10
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+    </script>
 
 @endsection

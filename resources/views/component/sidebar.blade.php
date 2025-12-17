@@ -7,7 +7,7 @@
         </a>
     </div>
     <hr class="horizontal dark mt-0">
-    
+
     {{-- <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main"> --}}
         <ul class="navbar-nav">
 
@@ -20,6 +20,7 @@
                 </a>
             </li>
 
+             @if (auth()->guard('pengguna')->user()->level == 'Super Admin')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('subprogram') ? 'active' : '' }}" href="{{route('subprogram')}}" wire:navigate>
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -92,15 +93,56 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#modalGantiPassword" data-bs-toggle="modal">
+
+
+
+
+            @elseif (auth()->guard('pengguna')->user()->level == 'Admin')
+             <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('rencana6tahun') ? 'active' : '' }}" href="{{route('rencana6tahun')}}" wire:navigate>
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-key text-dark"></i>
+                        <i class="fa-solid fa-list-check text-dark"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Ganti Password</span>
+                    <span class="nav-link-text ms-1">Rencana Aksi</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('rencanakerja') ? 'active' : '' }}" href="{{route('rencanakerja')}}" wire:navigate>
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-briefcase text-dark"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Rencana Kerja</span>
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('monev') ? 'active' : '' }}" href="{{route('monev')}}" wire:navigate>
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-magnifying-glass-chart text-dark"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Monitoring Evaluasi</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('progres') ? 'active' : '' }}" href="{{route('progres')}}" wire:navigate>
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-bars-progress text-dark"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Progres Kegiatan</span>
+                </a>
+            </li>
+
+            @endif
+
+            <li class="nav-item">
+               <a class="nav-link collapsed" data-bs-target="#modalGantiPassword" data-bs-toggle="modal">
+                   <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                       <i class="fa-solid fa-key text-dark"></i>
+                   </div>
+                   <span class="nav-link-text ms-1">Ganti Password</span>
+               </a>
+           </li>
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('logout') ? 'active' : '' }}" href="{{route('logout')}}" wire:navigate>
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">

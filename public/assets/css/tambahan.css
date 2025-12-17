@@ -229,4 +229,51 @@
     min-height: 231px;          /* Tinggi minimal kotak */
 }
 
+/* Pagination spacing */
+.pagination {
+    gap: 6px;
+}
+
+/* Button style */
+.pagination .page-link {
+    border-radius: 8px !important;
+    padding: 6px 12px;
+    font-size: 0.875rem;
+    color: #344767;
+}
+
+/* Active page */
+.pagination .page-item.active .page-link {
+    background-color: #fb8c00;
+    border-color: #fb8c00;
+    color: #fff;
+}
+
+/* Disabled */
+.pagination .page-item.disabled .page-link {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Hover */
+.pagination .page-link:hover {
+    background-color: #f1f3f5;
+}
+#paginationControls .page-item:first-child .page-link,
+#paginationControls .page-item:last-child .page-link {
+    font-size: 0;
+    padding: 0.375rem 0.75rem;
+}
+#paginationControls .page-item:first-child .page-link::after {
+    content: "‹";
+    font-size: 14px;
+}
+#paginationControls .page-item:last-child .page-link::after {
+    content: "›";
+    font-size: 14px;
+}
+  #showEntries {
+    width: 50px !important;
+    padding-right: 30px;
+}
 

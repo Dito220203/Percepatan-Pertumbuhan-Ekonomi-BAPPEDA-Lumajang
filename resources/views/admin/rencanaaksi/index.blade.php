@@ -16,8 +16,7 @@
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
+                        <input id="liveSearchInput" type="text" class="form-control" placeholder="Type here...">
                     </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
@@ -135,20 +134,32 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
-                   <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-    <h6>Tabel Rencana Aksi</h6>
-
-    <div class="d-flex gap-2">
-        <a href="{{ route('rencanaAksi.export.excel', request()->query()) }}" class="btn btn-success btn-sm mb-0">
-            <i class="fa-solid fa-file-excel me-1"></i>
-            Export Excel
-        </a>
-        <a href="{{ route('rencanaAksi.create') }}" class="btn btn-primary btn-sm mb-0">
-            <i class="fa-solid fa-plus me-1"></i>
-            Tambah Data
-        </a>
-    </div>
-</div>
+                    <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                        <h6>Tabel Rencana Aksi</h6>
+                         <div class="d-flex align-items-center gap-2">
+                            <label for="showEntries">Tampilkan</label>
+                            <select id="showEntries" class="form-select form-select-sm" style="width: auto;">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                            <span>entri</span>
+                        </div>
+                        @if (Auth::guard('pengguna')->user()->level === 'Super Admin')
+                            <div class="d-flex gap-2">
+                                <a href="{{ route('rencanaAksi.export.excel', request()->query()) }}"
+                                    class="btn btn-success btn-sm mb-0">
+                                    <i class="fa-solid fa-file-excel me-1"></i>
+                                    Export Excel
+                                </a>
+                                <a href="{{ route('rencanaAksi.create') }}" class="btn btn-primary btn-sm mb-0">
+                                    <i class="fa-solid fa-plus me-1"></i>
+                                    Tambah Data
+                                </a>
+                            </div>
+                        @endif
+                    </div>
 
                     {{-- Akhir Modifikasi Tombol --}}
 
@@ -199,9 +210,11 @@
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Keterangan</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Aksi</th>
+                                        @if (Auth::guard('pengguna')->user()->level === 'Super Admin')
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Aksi</th>
+                                        @endif
                                     </tr>
                                 </thead>
 
@@ -278,6 +291,17 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="card-footer py-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 text-sm text-secondary" id="paginationInfo"></div>
+
+                                <div class="col-md-6">
+                                    <nav class="d-flex justify-content-md-end justify-content-center">
+                                        <div id="paginationControls"></div>
+                                    </nav>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

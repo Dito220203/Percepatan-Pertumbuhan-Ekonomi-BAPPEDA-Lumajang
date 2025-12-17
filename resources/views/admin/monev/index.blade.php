@@ -17,8 +17,7 @@
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Type here...">
+                        <input id="liveSearchInput" type="text" class="form-control" placeholder="Type here...">
                     </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
@@ -190,6 +189,16 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                         <h6>Tabel Monitoring Evaluasi</h6>
+                         <div class="d-flex align-items-center gap-2">
+                            <label for="showEntries">Tampilkan</label>
+                            <select id="showEntries" class="form-select form-select-sm" style="width: auto;">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                            <span>entri</span>
+                        </div>
                         {{-- <a href="{{ route('rencanaAksi.export.excel', request()->query()) }}" class="btn btn-success btn-sm mb-0">
                             <i class="fa-solid fa-file-excel me-1"></i>
                             Export Excel
@@ -208,10 +217,10 @@
                                 <i class="fas fa-file-pdf me-2"></i>Export PDF
                             </a>
 
-                            <a href="{{ route('rencanaAksi.create') }}" class="btn btn-primary btn-sm mb-0">
+                            {{-- <a href="{{ route('rencanaAksi.create') }}" class="btn btn-primary btn-sm mb-0">
                                 <i class="fa-solid fa-plus me-1"></i>
                                 Tambah Data
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
 
@@ -329,7 +338,7 @@
                                             @if (count($anggarans) > 1)
                                                 {{-- Jika data lebih dari satu, gunakan tampilan multi-baris --}}
                                                 <td
-                                                    class="text-sm font-weight-bold mb-0 multi-item text-center align-middle">
+                                                    >
                                                     @foreach ($anggarans as $anggaran)
                                                         <div>{{ $anggaran ?: '-' }}</div>
                                                     @endforeach
@@ -344,7 +353,7 @@
                                             @if (count($sumberdanas) > 1)
                                                 {{-- Jika data lebih dari satu, gunakan tampilan multi-baris --}}
                                                 <td
-                                                    class="text-sm font-weight-bold mb-0 multi-item text-center align-middle">
+                                                    >
                                                     @foreach ($sumberdanas as $sumber)
                                                         <div>{{ $sumber ?: '-' }}</div>
                                                     @endforeach
@@ -559,6 +568,17 @@
                                 </tbody>
                             </table>
                         </div>
+                         <div class="card-footer py-3">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 text-sm text-secondary" id="paginationInfo"></div>
+
+                            <div class="col-md-6">
+                                <nav class="d-flex justify-content-md-end justify-content-center">
+                                    <div id="paginationControls"></div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
