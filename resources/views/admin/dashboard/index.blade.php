@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+
                         <input type="text" class="form-control" placeholder="Type here...">
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                                     <i class="fa-solid fa-list-check text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                                 <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                                    1600
+                                    {{ $totalRencanaAksi }}
                                 </h5>
                                 <span class="text-white text-sm">Rencana Aksi</span>
                             </div>
@@ -56,7 +56,11 @@
                                                 here</a></li>
                                     </ul>
                                 </div>
-                                <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+55%</p>
+                                <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0"
+                                    style="visibility: hidden;">
+                                    0
+                                </p>
+
                             </div>
                         </div>
                     </div>
@@ -73,7 +77,7 @@
                                     <i class="fa-solid fa-briefcase text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                                 <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                                    357
+                                    {{ $totalrenja }}
                                 </h5>
                                 <span class="text-white text-sm">Rencana Kerja</span>
                             </div>
@@ -91,7 +95,8 @@
                                                 here</a></li>
                                     </ul>
                                 </div>
-                                <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+124%</p>
+                                <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">valid :
+                                    {{ $renjaaktiv }} </p>
                             </div>
                         </div>
                     </div>
@@ -108,7 +113,7 @@
                                     <i class="fa-solid fa-chart-line text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                                 <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                                    892
+                                    {{ $totalmonev }}
                                 </h5>
                                 <span class="text-white text-sm">Monitoring Evaluasi</span>
                             </div>
@@ -126,7 +131,8 @@
                                                 here</a></li>
                                     </ul>
                                 </div>
-                                <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+78%</p>
+                                <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">valid :
+                                    {{ $monevaktiv }}</p>
                             </div>
                         </div>
                     </div>
@@ -143,7 +149,7 @@
                                     <i class="fa-solid fa-tasks text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                                 <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                                    1245
+                                    {{ $totalprogres }}
                                 </h5>
                                 <span class="text-white text-sm">Progres Kerja</span>
                             </div>
@@ -161,7 +167,8 @@
                                                 here</a></li>
                                     </ul>
                                 </div>
-                                <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+92%</p>
+                                <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">valid :
+                                    {{ $progresaktiv }}</p>
                             </div>
                         </div>
                     </div>
@@ -174,11 +181,20 @@
                     <div class="card-header pb-0">
                         <div class="d-flex justify-content-between">
                             <h6>Progres Kerja</h6>
-                            <div class="btn-group btn-group-sm" role="group">
-                                {{-- <button type="button" class="btn btn-outline-primary active">Bulan</button> --}}
-                                <button type="button" class="btn btn-outline-primary">Tahun</button>
-                            </div>
+
+                            <form method="GET">
+                                <select name="tahun" class="form-select form-select-sm" style=" width: 90px"
+                                    onchange="this.form.submit()">
+                                    @foreach ($listTahun as $tahun)
+                                        <option value="{{ $tahun }}" {{ $tahun == $tahunAktif ? 'selected' : '' }}>
+                                            {{ $tahun }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </form>
+
                         </div>
+
                     </div>
                     <div class="card-body p-3">
                         <canvas id="performanceChart" height="300"></canvas>
@@ -193,92 +209,27 @@
     <script>
         const ctx = document.getElementById('performanceChart').getContext('2d');
 
-        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, '#FFA031');
-        gradient.addColorStop(1, '#FFFF');
-
-        const performanceChart = new Chart(ctx, {
+        new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
                 datasets: [{
-                    label: 'Progres Kerja',
-                    data: [100, 200, 350, 520, 680, 820, 950, 1050, 1130, 1185, 1220, 1245],
+                    label: 'Progres Kerja Tahun {{ $tahunAktif }}',
+                    data: @json(array_values($dataChart)),
                     borderColor: '#D66700',
-                    backgroundColor: gradient,
-                    borderWidth: 3,
+                    backgroundColor: 'rgba(255,160,49,0.3)',
                     tension: 0.4,
                     fill: true,
-                    pointRadius: 6,
-                    pointHoverRadius: 8,
-                    pointBackgroundColor: '#D66700',
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2,
-                    pointHoverBackgroundColor: '#F27215',
-                    pointHoverBorderColor: '#fff',
-                    pointHoverBorderWidth: 3
+                    pointRadius: 5
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top',
-                        labels: {
-                            padding: 20,
-                            font: {
-                                size: 13
-                            },
-                            usePointStyle: true,
-                            pointStyle: 'circle'
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        padding: 12,
-                        cornerRadius: 8,
-                        titleFont: {
-                            size: 14
-                        },
-                        bodyFont: {
-                            size: 13
-                        },
-                        displayColors: true,
-                        intersect: false,
-                        mode: 'index'
-                    }
-                },
                 scales: {
                     y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.05)',
-                            drawBorder: false
-                        },
-                        ticks: {
-                            font: {
-                                size: 12
-                            },
-                            padding: 10
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            font: {
-                                size: 12
-                            },
-                            padding: 10
-                        }
+                        beginAtZero: true
                     }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
                 }
             }
         });
