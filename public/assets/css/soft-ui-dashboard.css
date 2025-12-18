@@ -28061,4 +28061,123 @@ pre[class*=language-] {
     text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Shadow tipis agar tetap terbaca */
     top: 0 !important;                     /* Reset posisi jika ada */
 }
+
+
+
+
+
+
+/* tabel *//* ===========================================
+       1. CONTAINER & SCROLLBAR SETUP
+       =========================================== */
+    .table-container {
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        background: white;
+    }
+
+    /* Scrollbar Atas (Dummy) */
+    .top-scrollbar-container {
+        width: 100%;
+        overflow-x: auto;
+        height: 15px;
+        background: #f8f9fa;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .top-scrollbar-content {
+        height: 1px;
+    }
+
+    /* Wrapper Tabel Utama */
+    .table-responsive {
+        max-height: 60vh; /* Tinggi maksimal tabel sebelum scroll vertikal muncul */
+        overflow: auto;   /* Aktifkan scroll otomatis (X dan Y) */
+        position: relative;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    /* ===========================================
+       2. TABEL STYLING (Blue Theme)
+       =========================================== */
+    #dataTable {
+        border-collapse: separate; /* Wajib agar sticky bekerja dengan border */
+        border-spacing: 0;
+        width: 100%;
+    }
+
+    /* Paksa tabel melebar agar scrollbar muncul */
+    #dataTable th, 
+    #dataTable td {
+        white-space: nowrap; /* Teks tidak boleh turun baris */
+        vertical-align: middle;
+        padding: 12px 15px; /* Spacing lebih lega */
+    }
+
+    /* --- STICKY HEADER (Beku di Atas) --- */
+    #dataTable thead th {
+        position: sticky;
+        top: 0;
+        background-color: #2196F3; /* WARNA BIRU SESUAI REFERENSI */
+        color: white;
+        z-index: 10;
+        border-bottom: none;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+    }
+
+    /* ===========================================
+       3. STICKY RIGHT COLUMN (Kolom Aksi Beku)
+       =========================================== */
+    
+    /* Header Kolom Terakhir (Aksi) */
+    #dataTable thead th:last-child {
+        position: sticky;
+        right: 0;
+        background-color: #2196F3; /* Harus sama dengan header */
+        z-index: 12; /* Paling TINGGI (di atas header lain & data) */
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1); /* Bayangan pemisah */
+    }
+
+    /* Data Body Kolom Terakhir (Tombol Aksi) */
+    #dataTable tbody td:last-child {
+        position: sticky;
+        right: 0;
+        background-color: #fff; /* Wajib bg putih agar tidak transparan */
+        z-index: 9;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.05);
+    }
+
+    /* Styling tambahan untuk baris */
+    #dataTable tbody tr:hover td {
+        background-color: #f1f4f9; /* Efek hover baris */
+    }
+    
+    /* Fix hover pada sticky column agar warnanya ikut berubah */
+    #dataTable tbody tr:hover td:last-child {
+        background-color: #f1f4f9;
+    }
+
+    /* Styling Scrollbar Browser (Chrome/Safari) */
+    .table-responsive::-webkit-scrollbar,
+    .top-scrollbar-container::-webkit-scrollbar {
+        height: 10px;
+        width: 10px;
+    }
+    
+    .table-responsive::-webkit-scrollbar-thumb,
+    .top-scrollbar-container::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 5px;
+    }
+    
+    .table-responsive::-webkit-scrollbar-thumb:hover,
+    .top-scrollbar-container::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
 /*# sourceMappingURL=dashboard-free.css.map */

@@ -48,54 +48,65 @@
                     {{-- Akhir Modifikasi Tombol --}}
 
                     <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-container">
+                            <div class="top-scrollbar-container">
+                                <div class="top-scrollbar-content"></div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="dataTable" class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                                                No
+                                            </th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Program</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Strategi</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                                                Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dataTabelBody">
+                                        @foreach ($subprogram as $data)
+                                            <tr>
+                                                <td class="text-center">{{ $loop->iteration }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->program }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->subprogram }}</td>
+                                                <td class="text-center text-sm font-weight-bold mb-0">
 
-                        <table id="dataTable" class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">No
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Program</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Strategi</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
-                                        Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="dataTabelBody">
-                                @foreach ($subprogram as $data)
-                                    <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td class="text-sm font-weight-bold mb-0">{{ $data->program }}</td>
-                                        <td class="text-sm font-weight-bold mb-0">{{ $data->subprogram }}</td>
-                                        <td class="text-center text-sm font-weight-bold mb-0">
-
-                                            <!-- Detail -->
-                                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                                data-bs-target="#ModalDetailSub{{ $data->id }}">
-                                                <i class="fa-solid fa-circle-info"></i>
-                                            </button>
-                                            <!-- Edit -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#Modalupdate{{ $data->id }}">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </button>
-                                            <!-- Hapus -->
-                                            <form id="formDelete-{{ $data->id }}"
-                                                action="{{ route('subprogram.delete', $data->id) }}" method="POST"
-                                                style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="btn btn-danger"
-                                                    onclick="confirmDelete('{{ $data->id }}')">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                                    <!-- Detail -->
+                                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                                        data-bs-target="#ModalDetailSub{{ $data->id }}">
+                                                        <i class="fa-solid fa-circle-info"></i>
+                                                    </button>
+                                                    <!-- Edit -->
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#Modalupdate{{ $data->id }}">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
+                                                    <!-- Hapus -->
+                                                    <form id="formDelete-{{ $data->id }}"
+                                                        action="{{ route('subprogram.delete', $data->id) }}" method="POST"
+                                                        style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button" class="btn btn-danger"
+                                                            onclick="confirmDelete('{{ $data->id }}')">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer py-3">
                         <div class="row align-items-center">
@@ -270,3 +281,7 @@
     @endforeach
     {{-- Akhir Modal Detail --}}
 @endsection
+@push('scripts')
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    {{-- Pastikan path asset-nya benar sesuai lokasi file kamu --}}
+@endpush

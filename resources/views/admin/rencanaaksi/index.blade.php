@@ -30,7 +30,7 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                         <h6>Tabel Rencana Aksi</h6>
-                         <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-2">
                             <label for="showEntries">Tampilkan</label>
                             <select id="showEntries" class="form-select form-select-sm" style="width: auto;">
                                 <option value="5">5</option>
@@ -57,151 +57,164 @@
 
                     {{-- Akhir Modifikasi Tombol --}}
 
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table id="dataTable" class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
-                                            No</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Strategi</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Rencana Aksi/Aktivitas</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Sub Kegiatan</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Kegiatan</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Program</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Lokasi</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Volume Target</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Satuan</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Tahun</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Perangkat Daerah</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Anggaran</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Sumber Dana</th>
-
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Keterangan</th>
-                                        @if (Auth::guard('pengguna')->user()->level === 'Super Admin')
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Aksi</th>
-                                        @endif
-                                    </tr>
-                                </thead>
-
-                                <tbody id="dataTabelBody">
-                                    @foreach ($rencanaAksi as $data)
+                    <div class="card-body ">
+                        <div class="table-container">
+                            <div class="top-scrollbar-container">
+                                <div class="top-scrollbar-content"></div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="dataTable" class="table align-items-center mb-0">
+                                    <thead>
                                         <tr>
-                                            <td class="text-center">
-                                                {{ $loop->iteration }}
-                                            </td>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                                                No</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Strategi</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Rencana Aksi/Aktivitas</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Sub Kegiatan</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Kegiatan</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Program</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Lokasi</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Volume Target</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Satuan</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Tahun</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Perangkat Daerah</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Anggaran</th>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Sumber Dana</th>
 
-                                            </td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->subprogram->subprogram ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->rencana_aksi }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->sub_kegiatan }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->kegiatan }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->nama_program }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->lokasi }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->volume }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->satuan }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->tahun }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->opd->nama ?? '-' }}</td>
-
-                                            @php
-                                                $anggarans = explode('; ', $data->anggaran);
-                                                $sumberdanas = explode('; ', $data->sumberdana);
-                                            @endphp
-
-                                            @if (count($anggarans) > 1)
-                                                <td class="text-sm font-weight-bold mb-0 multi-item-rensi align-middle">
-                                                    @foreach ($anggarans as $anggaran)
-                                                        <div>{{ $anggaran ?: '-' }}</div>
-                                                    @endforeach
-                                                </td>
-                                            @else
-                                                <td class="text-sm font-weight-bold mb-0">{{ $data->anggaran ?: '-' }}
-                                                </td>
-                                            @endif
-
-                                            @if (count($sumberdanas) > 1)
-                                                <td class="text-sm font-weight-bold mb-0 multi-item-rensi align-middle">
-                                                    @foreach ($sumberdanas as $sumber)
-                                                        <div>{{ $sumber ?: '-' }}</div>
-                                                    @endforeach
-                                                </td>
-                                            @else
-                                                <td class="text-sm font-weight-bold mb-0">{{ $data->sumberdana ?: '-' }}
-                                                </td>
-                                            @endif
-
-
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->keterangan ?? '-' }}</td>
+                                            <th
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Keterangan</th>
                                             @if (Auth::guard('pengguna')->user()->level === 'Super Admin')
-                                                <td class="text-center text-sm font-weight-bold mb-0">
-                                                    <div class="d-flex justify-content-center gap-1">
-                                                        <a href="{{ route('rencanaAksi.edit', $data->id) }}"
-                                                            class="btn btn-primary" title="Edit">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </a>
-                                                        <form id="formDelete-{{ $data->id }}"
-                                                            action="{{ route('rencanaAksi.destroy', $data->id) }}"
-                                                            method="POST" style="display:inline;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="button" class="btn btn-danger"
-                                                                onclick="confirmDelete('{{ $data->id }}')">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    Aksi</th>
                                             @endif
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="card-footer py-3">
-                            <div class="row align-items-center">
-                                <div class="col-md-6 text-sm text-secondary" id="paginationInfo"></div>
+                                    </thead>
 
-                                <div class="col-md-6">
-                                    <nav class="d-flex justify-content-md-end justify-content-center">
-                                        <div id="paginationControls"></div>
-                                    </nav>
+                                    <tbody id="dataTabelBody">
+                                        @foreach ($rencanaAksi as $data)
+                                            <tr>
+                                                <td class="text-center">
+                                                    {{ $loop->iteration }}
+                                                </td>
+
+                                                </td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->subprogram->subprogram ?? '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->rencana_aksi }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->sub_kegiatan }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->kegiatan }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->nama_program }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->lokasi }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->volume }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->satuan }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->tahun }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->opd->nama ?? '-' }}
+                                                </td>
+
+                                                @php
+                                                    $anggarans = explode('; ', $data->anggaran);
+                                                    $sumberdanas = explode('; ', $data->sumberdana);
+                                                @endphp
+
+                                                @if (count($anggarans) > 1)
+                                                    <td class="text-sm font-weight-bold mb-0 multi-item-rensi align-middle">
+                                                        @foreach ($anggarans as $anggaran)
+                                                            <div>{{ $anggaran ?: '-' }}</div>
+                                                        @endforeach
+                                                    </td>
+                                                @else
+                                                    <td class="text-sm font-weight-bold mb-0">{{ $data->anggaran ?: '-' }}
+                                                    </td>
+                                                @endif
+
+                                                @if (count($sumberdanas) > 1)
+                                                    <td class="text-sm font-weight-bold mb-0 multi-item-rensi align-middle">
+                                                        @foreach ($sumberdanas as $sumber)
+                                                            <div>{{ $sumber ?: '-' }}</div>
+                                                        @endforeach
+                                                    </td>
+                                                @else
+                                                    <td class="text-sm font-weight-bold mb-0">
+                                                        {{ $data->sumberdana ?: '-' }}
+                                                    </td>
+                                                @endif
+
+
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->keterangan ?? '-' }}
+                                                </td>
+                                                @if (Auth::guard('pengguna')->user()->level === 'Super Admin')
+                                                    <td class="text-center text-sm font-weight-bold mb-0">
+                                                        <div class="d-flex justify-content-center gap-1">
+                                                            <a href="{{ route('rencanaAksi.edit', $data->id) }}"
+                                                                class="btn btn-primary" title="Edit">
+                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                            </a>
+                                                            <form id="formDelete-{{ $data->id }}"
+                                                                action="{{ route('rencanaAksi.destroy', $data->id) }}"
+                                                                method="POST" style="display:inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="button" class="btn btn-danger"
+                                                                    onclick="confirmDelete('{{ $data->id }}')">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                @endif
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer py-3">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6 text-sm text-secondary" id="paginationInfo"></div>
+
+                                    <div class="col-md-6">
+                                        <nav class="d-flex justify-content-md-end justify-content-center">
+                                            <div id="paginationControls"></div>
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
+    @endsection
+    @push('scripts')
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    {{-- Pastikan path asset-nya benar sesuai lokasi file kamu --}}
+@endpush
 
-
-    </div>
-@endsection
