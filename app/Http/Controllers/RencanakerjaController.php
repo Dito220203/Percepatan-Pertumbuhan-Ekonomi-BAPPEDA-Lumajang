@@ -90,7 +90,7 @@ class RencanakerjaController extends Controller
         $tahun = $request->input('tahun'); // Ambil nilai tahun dari request
 
         // Kirim user dan tahun ke class export
-        return Excel::download(new RencanaExport($user, $tahun), 'rencana_kerja.xlsx');
+        return Excel::download(new RencanaExport($user, $tahun), 'rencana_kerja_percepatan_pertumbuhan_ekonomi.xlsx');
     }
 
     public function store(Request $request)

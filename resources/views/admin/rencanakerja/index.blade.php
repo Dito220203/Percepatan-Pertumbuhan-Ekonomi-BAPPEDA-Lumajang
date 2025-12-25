@@ -82,7 +82,7 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                         <h6>Tabel Rencana Kerja</h6>
-                         <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-2">
                             <label for="showEntries">Tampilkan</label>
                             <select id="showEntries" class="form-select form-select-sm" style="width: auto;">
                                 <option value="5">5</option>
@@ -106,141 +106,135 @@
                     </div>
                     {{-- Akhir Modifikasi Tombol --}}
 
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div id="dataTable" class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
-                                            No</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Strategi</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Rencana Aksi/Aktivitas</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Sub Kegiatan</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Kegiatan</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Program</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Lokasi</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Volume Target</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Satuan</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Tahun</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Perangkat Daerah</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Anggaran</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Sumber Dana</th>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <div class="top-scrollbar-container">
+                                <div class="top-scrollbar-content"></div>
+                            </div>
+                            <div class="table-responsive ">
+                                <table id="dataTable" class="table align-items-center ">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center text-uppercase  font-weight-bolder">
+                                                No</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5">
+                                                Strategi</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5">
+                                                Rencana Aksi/Aktivitas</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5 col-medium">
+                                                Sub Kegiatan</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5 col-long">
+                                                Kegiatan</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5">
+                                                Program</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5">
+                                                Lokasi</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5">
+                                                Volume Target</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5">
+                                                Satuan</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5">
+                                                Tahun</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5">
+                                                Perangkat Daerah</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5">
+                                                Anggaran</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5">
+                                                Sumber Dana</th>
 
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Status</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Keterangan</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Aksi</th>
-                                    </tr>
-                                </thead>
+                                            <th class="text-uppercase  font-weight-bolder ps-5">
+                                                Status</th>
+                                            <th class="text-uppercase  font-weight-bolder ps-5">
+                                                Keterangan</th>
+                                            <th class="text-center text-uppercase  font-weight-bolder ps-5">
+                                                Aksi</th>
+                                        </tr>
+                                    </thead>
 
-                                <tbody id="dataTabelBody">
-                                    @foreach ($rencana as $data)
-                                        <tr id="row-{{ $data->id }}"
-                                            class="{{ $data->input === 'manual' ? 'highlight-manual-renja' : '' }}">
+                                    <tbody id="dataTabelBody">
+                                        @foreach ($rencana as $data)
+                                            <tr id="row-{{ $data->id }}"
+                                                class="{{ $data->input === 'manual' ? 'highlight-manual-renja' : '' }}">
 
-                                            <td class="text-center">
-                                                {{ $loop->iteration }}
-                                            </td>
-
-                                            </td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->subprogram->subprogram ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->rencana_aksi }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->sub_kegiatan }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->kegiatan }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->nama_program }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->lokasi }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->volume }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->satuan }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->tahun }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->opd->nama ?? '-' }}</td>
-
-                                            @php
-                                                $anggarans = explode('; ', $data->anggaran);
-                                                $sumberdanas = explode('; ', $data->sumberdana);
-                                            @endphp
-
-                                            @if (count($anggarans) > 1)
-                                                <td class="text-sm font-weight-bold mb-0 multi-item-rensi align-middle">
-                                                    @foreach ($anggarans as $anggaran)
-                                                        <div>{{ $anggaran ?: '-' }}</div>
-                                                    @endforeach
+                                                <td class="text-center">
+                                                    {{ $loop->iteration }}
                                                 </td>
-                                            @else
-                                                <td class="text-sm font-weight-bold mb-0">{{ $data->anggaran ?: '-' }}
-                                                </td>
-                                            @endif
 
-                                            @if (count($sumberdanas) > 1)
-                                                <td class="text-sm font-weight-bold mb-0 multi-item-rensi align-middle">
-                                                    @foreach ($sumberdanas as $sumber)
-                                                        <div>{{ $sumber ?: '-' }}</div>
-                                                    @endforeach
                                                 </td>
-                                            @else
-                                                <td class="text-sm font-weight-bold mb-0">{{ $data->sumberdana ?: '-' }}
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->subprogram->subprogram ?? '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->rencana_aksi }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->sub_kegiatan }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->kegiatan }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->nama_program }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->lokasi }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->volume }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->satuan }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->tahun }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->opd->nama ?? '-' }}
                                                 </td>
-                                            @endif
 
+                                                @php
+                                                    $anggarans = explode('; ', $data->anggaran);
+                                                    $sumberdanas = explode('; ', $data->sumberdana);
+                                                @endphp
 
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                @if ($data->status === 'Valid')
-                                                    <span class="badge bg-success">{{ $data->status }}</span>
+                                                @if (count($anggarans) > 1)
+                                                    <td
+                                                        class="text-sm font-weight-bold mb-0 multi-item-rensi align-middle">
+                                                        @foreach ($anggarans as $anggaran)
+                                                            <div>{{ $anggaran ?: '-' }}</div>
+                                                        @endforeach
+                                                    </td>
                                                 @else
-                                                    <span class="badge bg-secondary">{{ $data->status }}</span>
+                                                    <td class="text-sm font-weight-bold mb-0">{{ $data->anggaran ?: '-' }}
+                                                    </td>
                                                 @endif
-                                            </td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->keterangan ?? '-' }}</td>
-                                            <td class="text-center text-sm font-weight-bold mb-0">
-                                                <div class="d-flex justify-content-center gap-1">
-                                                    @if (Auth::guard('pengguna')->user()->level === 'Super Admin')
-                                                        <button
-                                                            class="btn btn-sm {{ $data->status == 'Valid' ? 'btn-warning' : 'btn-success' }}"
-                                                            onclick="updateStatus('{{ $data->id }}', '{{ $data->status }}')">
-                                                            @if ($data->status == 'Valid')
-                                                                Batalkan
-                                                            @else
-                                                                Validasi
-                                                            @endif
-                                                        </button>
 
-                                                        <form id="form-status-{{ $data->id }}"
-                                                            action="{{ route('rencana.validasi', $data->id) }}"
-                                                            method="POST" style="display:none;">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <input type="hidden" name="status" value="">
-                                                        </form>
-                                                            @endif
+                                                @if (count($sumberdanas) > 1)
+                                                    <td
+                                                        class="text-sm font-weight-bold mb-0 multi-item-rensi align-middle">
+                                                        @foreach ($sumberdanas as $sumber)
+                                                            <div>{{ $sumber ?: '-' }}</div>
+                                                        @endforeach
+                                                    </td>
+                                                @else
+                                                    <td class="text-sm font-weight-bold mb-0">
+                                                        {{ $data->sumberdana ?: '-' }}
+                                                    </td>
+                                                @endif
+
+
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    @if ($data->status === 'Valid')
+                                                        <span class="badge bg-success">{{ $data->status }}</span>
+                                                    @else
+                                                        <span class="badge bg-secondary">{{ $data->status }}</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->keterangan ?? '-' }}
+                                                </td>
+                                                <td class="text-center text-sm font-weight-bold mb-0">
+                                                    <div class="d-flex justify-content-center gap-1">
+                                                        @if (Auth::guard('pengguna')->user()->level === 'Super Admin')
+                                                            <button
+                                                                class="btn btn-sm {{ $data->status == 'Valid' ? 'btn-warning' : 'btn-success' }}"
+                                                                onclick="updateStatus('{{ $data->id }}', '{{ $data->status }}')">
+                                                                @if ($data->status == 'Valid')
+                                                                    Batalkan
+                                                                @else
+                                                                    Validasi
+                                                                @endif
+                                                            </button>
+
+                                                            <form id="form-status-{{ $data->id }}"
+                                                                action="{{ route('rencana.validasi', $data->id) }}"
+                                                                method="POST" style="display:none;">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <input type="hidden" name="status" value="">
+                                                            </form>
+                                                        @endif
 
                                                         @if ($data->is_locked)
                                                             {{-- Jika terkunci, tombol dinonaktifkan --}}
@@ -262,35 +256,36 @@
                                                         @endpush
 
 
-                                                    <form id="formDelete-{{ $data->id }}"
-                                                        action="{{ route('rencana.delete', $data->id) }}" method="POST"
-                                                        style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" class="btn btn-danger"
-                                                            onclick="confirmDelete('{{ $data->id }}')">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </td>
+                                                        <form id="formDelete-{{ $data->id }}"
+                                                            action="{{ route('rencana.delete', $data->id) }}"
+                                                            method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" class="btn btn-danger"
+                                                                onclick="confirmDelete('{{ $data->id }}')">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </td>
 
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                         <div class="card-footer py-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-6 text-sm text-secondary" id="paginationInfo"></div>
-
-                            <div class="col-md-6">
-                                <nav class="d-flex justify-content-md-end justify-content-center">
-                                    <div id="paginationControls"></div>
-                                </nav>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>
+                        <div class="card-footer py-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 text-sm text-secondary" id="paginationInfo"></div>
+
+                                <div class="col-md-6">
+                                    <nav class="d-flex justify-content-md-end justify-content-center">
+                                        <div id="paginationControls"></div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -299,3 +294,6 @@
 
     </div>
 @endsection
+@push('scripts')
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+@endpush

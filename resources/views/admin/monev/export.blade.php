@@ -16,60 +16,62 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            font-size: 10px;
-            line-height: 1.2;
+            font-family: 'Inter', sans-serif;
+            font-size: 9px; /* Sedikit diperbesar agar terbaca */
+            line-height: 1.3;
             color: #333;
             margin: 0;
             padding: 0;
             background-color: #fff;
         }
 
+        /* --- HEADER SECTION (JUDUL UTAMA) --- */
         .header-section {
             text-align: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #1f4e79;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa; /* Background abu muda */
+            border-bottom: 3px solid #FF8C42; /* Garis bawah Orange */
         }
 
         .header-section h1 {
-            font-size: 16px;
-            font-weight: bold;
-            color: #1f4e79;
-            margin: 0 0 5px 0;
+            font-size: 18px; /* Lebih besar */
+            font-weight: 800; /* Lebih tebal */
+            color: #333; /* Warna Abu Gelap */
+            margin: 0;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
+        /* --- INFO SECTION --- */
         .info-section {
-            background-color: #f8f9fa;
+            background-color: #fff;
             border: 1px solid #dee2e6;
-            border-radius: 5px;
-            padding: 10px;
+            border-left: 4px solid #FF8C42; /* Aksen Orange di kiri */
+            padding: 10px 15px;
             margin-bottom: 15px;
             font-size: 10px;
         }
 
         .info-row {
             display: inline-block;
-            margin-right: 25px;
-            font-weight: bold;
+            margin-right: 30px;
         }
 
         .info-label {
-            color: #495057;
+            font-weight: bold;
+            color: #555;
         }
 
         .info-value {
-            color: #1f4e79;
-            background-color: #e3f2fd;
-            padding: 2px 6px;
-            border-radius: 3px;
-            margin-left: 3px;
+            color: #FF8C42; /* Value berwarna Orange */
+            font-weight: bold;
+            margin-left: 5px;
         }
 
+        /* --- TABLE STYLING --- */
         .table-container {
             width: 100%;
-            overflow: visible;
         }
 
         table {
@@ -79,99 +81,61 @@
             background: white;
         }
 
-        thead {
-            background-color: #0084ff;
-            color: white;
-        }
-
+        /* Header Tabel (ORANGE) */
         thead th {
+            background-color: #FF8C42; /* Warna Orange Tema */
+            color: white; /* Teks Putih */
             font-weight: bold;
-            font-size: 7px;
+            font-size: 8px;
             text-transform: uppercase;
-            padding: 6px 3px;
-            border: 1px solid #fff;
+            padding: 8px 4px;
+            border: 1px solid #e0e0e0;
             text-align: center;
             vertical-align: middle;
         }
 
+        /* Body Tabel */
         tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        tbody tr:nth-child(odd) {
-            background-color: #ffffff;
+            background-color: #fff8f5; /* Zebra striping orange sangat muda */
         }
 
         td {
-            padding: 4px 2px;
+            padding: 6px 4px;
             border: 1px solid #dee2e6;
-            font-size: 7px;
-            word-wrap: break-word;
             vertical-align: top;
-            line-height: 1.2;
         }
 
-        .text-center {
-            text-align: center;
-        }
+        /* --- UTILITIES --- */
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        .font-bold { font-weight: bold; }
 
-        .text-left {
-            text-align: left;
-        }
-
-        .text-right {
-            text-align: right;
-        }
-
+        /* Badge Status */
         .status-badge {
             display: inline-block;
-            padding: 2px 5px;
-            border-radius: 3px;
+            padding: 2px 6px;
+            border-radius: 4px;
             font-weight: bold;
-            font-size: 6px;
+            font-size: 7px;
             text-transform: uppercase;
-            margin-bottom: 2px;
+            color: white;
         }
+        
+        .status-valid { background-color: #28a745; }
+        .status-pending { background-color: #dc3545; }
+        .rka-sudah { background-color: #17a2b8; }
+        .rka-belum { background-color: #ffc107; color: #333; }
 
-        .status-valid {
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .status-pending {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-
-        .rka-sudah {
-            background-color: #d1ecf1;
-            color: #0c5460;
-        }
-
-        .rka-belum {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-
-        .currency {
-            font-weight: bold;
-            color: #1f4e79;
-            font-size: 6px;
-        }
-
+        /* Footer */
         .footer {
-            margin-top: 15px;
-            text-align: center;
+            margin-top: 20px;
+            text-align: right;
             font-size: 8px;
-            color: #666;
-            border-top: 1px solid #dee2e6;
-            padding-top: 8px;
-        }
-
-        .long-text {
-            font-size: 6px;
-            line-height: 1.1;
-            word-break: break-word;
+            color: #888;
+            font-style: italic;
+            border-top: 1px solid #eee;
+            padding-top: 5px;
         }
     </style>
 </head>

@@ -17,26 +17,20 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
-    <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,800" rel="stylesheet" />
-    <!-- Nucleo Icons -->
-    {{-- <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" /> --}}
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="{{ asset('assets/fonts/font.css') }}" rel="stylesheet">
 
     <link id="pagestyle" href="{{ asset('assets/css/soft-ui-dashboard.css?v=1.1.0') }}" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="{{ asset('assets/css/tambahan.css') }}">
     <!-- PETA -->
     <link href="{{ asset('assets/vendor/leaflet/leaflet.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/leaflet/geosearch.css') }}" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.css" /> --}}
+
+    <link href="{{ asset('assets/css/all.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('assets/vendor/quil1.3.6/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/quil1.3.6/quill.snow.css') }}" rel="stylesheet">
 
-    
-    
-    {{-- <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script> --}}
     <script src="{{ asset('assets/vendor/jquery-3.6.0/jquery-3.6.0.min.js') }}"></script>
 
 
@@ -59,7 +53,7 @@
     </main>
 
 
-    <div class="fixed-plugin">
+    {{-- <div class="fixed-plugin">
         <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
             <i class="fa fa-cog py-2"> </i>
         </a>
@@ -77,24 +71,24 @@
             </div>
             <hr class="horizontal dark my-1">
         </div>
-    </div>
+    </div> --}}
     <script src="{{ asset('assets/vendor/leaflet/leaflet.js') }}"></script>
     <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="{{ asset('assets/js/sweetalert2@11.js') }}"></script>
     <script src="{{ asset('js/sweetalert-custom.js') }}"></script>
     <script src="{{ asset('js/updateStatus.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
     {{-- js buatan --}}
-     <script src="{{ asset('js/entries-pagnation-admin.js') }}"></script>
+    <script src="{{ asset('js/entries-pagnation-admin.js') }}"></script>
     <script src="{{ asset('js/preview-image.js') }}"></script>
- <script src="{{ asset('js/live-search.js') }}"></script>
+    <script src="{{ asset('js/live-search.js') }}"></script>
     <script src="{{ asset('js/alerthapus2.js') }}"></script>
     <script src="{{ asset('js/modalApludMonevDokumentasi.js') }}"></script>
     <script src="{{ asset('assets/vendor/leaflet/geosearch.umd.js') }}"></script>
@@ -116,7 +110,6 @@
     @endif
 
     <script src="{{ asset('js/preview-image.js') }}"></script>
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="{{ asset('assets/js/soft-ui-dashboard.min.js?v=1.1.0') }}"></script>
     @stack('scripts')
 </body>

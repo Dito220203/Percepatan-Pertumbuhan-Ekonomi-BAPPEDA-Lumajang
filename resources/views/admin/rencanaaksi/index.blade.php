@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
-                    <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <h6>Tabel Rencana Aksi</h6>
                         <div class="d-flex align-items-center gap-2">
                             <label for="showEntries">Tampilkan</label>
@@ -63,55 +63,54 @@
                                 <div class="top-scrollbar-content"></div>
                             </div>
                             <div class="table-responsive">
-                                <table id="dataTable" class="table align-items-center mb-0">
+                                <table id="dataTable" class="table  ">
                                     <thead>
                                         <tr>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                                                class="text-center text-uppercase font-weight-bolder">
                                                 No</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase font-weight-bolder ps-5">
                                                 Strategi</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase font-weight-bolder ps-5">
                                                 Rencana Aksi/Aktivitas</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase font-weight-bolder ps-5 col-medium">
                                                 Sub Kegiatan</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase font-weight-bolder ps-5 col-long">
                                                 Kegiatan</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase font-weight-bolder ps-5">
                                                 Program</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase font-weight-bolder ps-5">
                                                 Lokasi</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            <th class="text-uppercase font-weight-bolder ps-5">
                                                 Volume Target</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase font-weight-bolder ps-5">
                                                 Satuan</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase font-weight-bolder ps-5">
                                                 Tahun</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase font-weight-bolder ps-5">
                                                 Perangkat Daerah</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase font-weight-bolder ps-5 col-long">
                                                 Anggaran</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase font-weight-bolder ps-5">
                                                 Sumber Dana</th>
 
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase font-weight-bolder ps-5">
                                                 Keterangan</th>
                                             @if (Auth::guard('pengguna')->user()->level === 'Super Admin')
                                                 <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    class="text-center text-uppercase font-weight-bolder  ps-5">
                                                     Aksi</th>
                                             @endif
                                         </tr>

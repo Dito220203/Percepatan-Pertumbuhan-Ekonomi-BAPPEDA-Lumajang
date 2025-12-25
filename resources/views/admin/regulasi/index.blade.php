@@ -31,7 +31,7 @@
                     {{-- Modifikasi: Tombol Tambah Data sekarang memicu modal --}}
                     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                         <h6>Tabel Regulasi</h6>
-                         <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-2">
                             <label for="showEntries">Tampilkan</label>
                             <select id="showEntries" class="form-select form-select-sm" style="width: auto;">
                                 <option value="5">5</option>
@@ -48,114 +48,119 @@
                     </div>
                     {{-- Akhir Modifikasi Tombol --}}
 
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table id="dataTable" class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
-                                            No
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Judul</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Tanggal dibuat</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Status</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            file</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
-                                            Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="dataTabelBody">
-                                    @foreach ($regulasi as $data)
+                    <div class="card-body">
+                        <div class="table-container">
+                            <div class="top-scrollbar-container">
+                                <div class="top-scrollbar-content"></div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="dataTable" class="table align-items-center">
+                                    <thead>
                                         <tr>
-                                            <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->judul }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">{{ $data->tanggal }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                @if ($data->status === 'Aktif')
-                                                    <span class="badge bg-success">{{ $data->status }}</span>
-                                                @else
-                                                    <span class="badge bg-secondary">{{ $data->status }}</span>
-                                                @endif
-                                            </td>
+                                            <th class="text-center text-uppercase font-weight-bolder">
+                                                No
+                                            </th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Judul</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Tanggal dibuat</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Status</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                file</th>
+                                            <th class="text-center text-uppercase font-weight-bolder">
+                                                Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dataTabelBody">
+                                        @foreach ($regulasi as $data)
+                                            <tr>
+                                                <td class="text-center">{{ $loop->iteration }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->judul }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">{{ $data->tanggal }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    @if ($data->status === 'Aktif')
+                                                        <span class="badge bg-success">{{ $data->status }}</span>
+                                                    @else
+                                                        <span class="badge bg-secondary">{{ $data->status }}</span>
+                                                    @endif
+                                                </td>
 
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                <button type="button" class="btn btn-sm tambah-utama"
-                                                    data-bs-toggle="modal" data-bs-target="#fileModal{{ $data->id }}">
-                                                    Lihat
-                                                </button>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    <button type="button" class="btn btn-sm tambah-utama"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#fileModal{{ $data->id }}">
+                                                        Lihat
+                                                    </button>
 
 
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="fileModal{{ $data->id }}" tabindex="-1"
-                                                    aria-labelledby="fileModalLabel{{ $data->id }}"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog modal-xl modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title"
-                                                                    id="fileModalLabel{{ $data->id }}">Lihat File
-                                                                    Regulasi</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body text-center">
-                                                                <iframe
-                                                                    src="{{ asset('storage/regulasi/' . $data->file) }}"
-                                                                    width="100%" height="600px"></iframe>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="fileModal{{ $data->id }}" tabindex="-1"
+                                                        aria-labelledby="fileModalLabel{{ $data->id }}"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-xl modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="fileModalLabel{{ $data->id }}">Lihat File
+                                                                        Regulasi</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body text-center">
+                                                                    <iframe
+                                                                        src="{{ asset('storage/regulasi/' . $data->file) }}"
+                                                                        width="100%" height="600px"></iframe>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                            </td>
-                                            <td class="text-center align-middle">
-                                                <div class="d-flex justify-content-center gap-1">
-                                                    <form action="{{ route('regulasi.edit', $data->id) }}"
-                                                        method="GET">
-                                                        <button class="btn btn-primary">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </button>
-                                                    </form>
-                                                    <form id="formDelete-{{ $data->id }}"
-                                                        action="{{ route('regulasi.delete', $data->id) }}" method="POST"
-                                                        style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" class="btn btn-danger "
-                                                            onclick="confirmDelete('{{ $data->id }}')">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </form>
+                                                </td>
+                                                <td class="text-center align-middle">
+                                                    <div class="d-flex justify-content-center gap-1">
+                                                        <form action="{{ route('regulasi.edit', $data->id) }}"
+                                                            method="GET">
+                                                            <button class="btn btn-primary">
+                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                            </button>
+                                                        </form>
+                                                        <form id="formDelete-{{ $data->id }}"
+                                                            action="{{ route('regulasi.delete', $data->id) }}"
+                                                            method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" class="btn btn-danger "
+                                                                onclick="confirmDelete('{{ $data->id }}')">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </form>
 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                         <div class="card-footer py-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-6 text-sm text-secondary" id="paginationInfo"></div>
-
-                            <div class="col-md-6">
-                                <nav class="d-flex justify-content-md-end justify-content-center">
-                                    <div id="paginationControls"></div>
-                                </nav>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>
+                        <div class="card-footer py-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 text-sm text-secondary" id="paginationInfo"></div>
+
+                                <div class="col-md-6">
+                                    <nav class="d-flex justify-content-md-end justify-content-center">
+                                        <div id="paginationControls"></div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+@endpush

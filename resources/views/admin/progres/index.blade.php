@@ -31,7 +31,7 @@
                     {{-- Modifikasi: Tombol Tambah Data sekarang memicu modal --}}
                     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                         <h6>Tabel Progres Kerja</h6>
-                         <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-2">
                             <label for="showEntries">Tampilkan</label>
                             <select id="showEntries" class="form-select form-select-sm" style="width: auto;">
                                 <option value="5">5</option>
@@ -45,90 +45,92 @@
                     </div>
                     {{-- Akhir Modifikasi Tombol --}}
 
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table id="dataTable" class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
-                                            No
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Rencana Aksi / Aktivitas</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Tahun</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Status</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
-                                            Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="dataTabelBody">
-                                    @foreach ($progres as $data)
-                                        <tr id="row-{{ $data->id }}">
-                                            <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{-- Panggil relasi 'rencanakerja', lalu kolom 'rencana_aksi' dari tabel RencanaKerja --}}
-                                                {{ $data->monev?->rencanakerja?->rencana_aksi ?? '-' }}
-                                            </td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->monev->rencanakerja->tahun ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                @if ($data->status === 'Valid')
-                                                    <span class="badge bg-success">{{ $data->status }}</span>
-                                                @else
-                                                    <span class="badge bg-secondary">{{ $data->status }}</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-center align-middle">
-                                                <div class="d-flex justify-content-center gap-1">
-                                                    <!-- Tombol Detail -->
-                                                    <button type="button" class="btn btn-tambah-utama " title="Lihat"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#detailModal{{ $data->id }}">
-                                                        <i class="fa-solid fa-eye"></i>
-                                                    </button>
-
-                                                    @if (auth()->guard('pengguna')->user()->level == 'Super Admin')
-                                                        <button
-                                                            class="btn btn-sm {{ $data->status == 'Valid' ? 'btn-warning' : 'btn-success' }}"
-                                                            onclick="updateStatus('{{ $data->id }}', '{{ $data->status }}')">
-                                                            @if ($data->status == 'Valid')
-                                                                Batalkan
-                                                            @else
-                                                                Validasi
-                                                            @endif
+                    <div class="card-body">
+                        <div class="table-container">
+                            <div class="top-scrollbar-container">
+                                <div class="top-scrollbar-content"></div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="dataTable" class="table align-items-center">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center text-uppercase font-weight-bolder">
+                                                No
+                                            </th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Rencana Aksi / Aktivitas</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Tahun</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Status</th>
+                                            <th class="text-center text-uppercase font-weight-bolder">
+                                                Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dataTabelBody">
+                                        @foreach ($progres as $data)
+                                            <tr id="row-{{ $data->id }}">
+                                                <td class="text-center">{{ $loop->iteration }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{-- Panggil relasi 'rencanakerja', lalu kolom 'rencana_aksi' dari tabel RencanaKerja --}}
+                                                    {{ $data->monev?->rencanakerja?->rencana_aksi ?? '-' }}
+                                                </td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->monev->rencanakerja->tahun ?? '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    @if ($data->status === 'Valid')
+                                                        <span class="badge bg-success">{{ $data->status }}</span>
+                                                    @else
+                                                        <span class="badge bg-secondary">{{ $data->status }}</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center align-middle">
+                                                    <div class="d-flex justify-content-center gap-1">
+                                                        <!-- Tombol Detail -->
+                                                        <button type="button" class="btn btn-tambah-utama " title="Lihat"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#detailModal{{ $data->id }}">
+                                                            <i class="fa-solid fa-eye"></i>
                                                         </button>
 
-                                                        <form id="form-status-{{ $data->id }}"
-                                                            action="{{ route('progres.updateStatus', $data->id) }}"
-                                                            method="POST" style="display:none;">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <input type="hidden" name="status" value="">
-                                                        </form>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                         <div class="card-footer py-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-6 text-sm text-secondary" id="paginationInfo"></div>
+                                                        @if (auth()->guard('pengguna')->user()->level == 'Super Admin')
+                                                            <button
+                                                                class="btn btn-sm {{ $data->status == 'Valid' ? 'btn-warning' : 'btn-success' }}"
+                                                                onclick="updateStatus('{{ $data->id }}', '{{ $data->status }}')">
+                                                                @if ($data->status == 'Valid')
+                                                                    Batalkan
+                                                                @else
+                                                                    Validasi
+                                                                @endif
+                                                            </button>
 
-                            <div class="col-md-6">
-                                <nav class="d-flex justify-content-md-end justify-content-center">
-                                    <div id="paginationControls"></div>
-                                </nav>
+                                                            <form id="form-status-{{ $data->id }}"
+                                                                action="{{ route('progres.updateStatus', $data->id) }}"
+                                                                method="POST" style="display:none;">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <input type="hidden" name="status" value="">
+                                                            </form>
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>
+                        <div class="card-footer py-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 text-sm text-secondary" id="paginationInfo"></div>
+
+                                <div class="col-md-6">
+                                    <nav class="d-flex justify-content-md-end justify-content-center">
+                                        <div id="paginationControls"></div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
                         @foreach ($progres as $data)
                             <div class="modal fade" id="detailModal{{ $data->id }}" tabindex="-1"
                                 aria-labelledby="detailModalLabel{{ $data->id }}" aria-hidden="true">
@@ -138,8 +140,8 @@
                                             <h5 class="modal-title" id="detailModalLabel{{ $data->id }}">
                                                 <i class="bi bi-info-circle me-2"></i>Detail Progres
                                             </h5>
-                                            <button type="button" class="btn-close btn-close-white"
-                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body text-hijau-kustom">
                                             <div class="row g-4">
@@ -152,11 +154,10 @@
                                                         <div class="table-wrapper ">
                                                             <table class="table table-hover  mb-0">
                                                                 <tr>
-                                                                    <th
-                                                                        class="bg-light text-hijau-kustom th-detail-lebar">
-                                                                        <i
-                                                                            class="bi bi-clipboard-check me-2"></i>Rencana
-                                                                        Aksi</th>
+                                                                    <th class="bg-light text-hijau-kustom th-detail-lebar">
+                                                                        <i class="bi bi-clipboard-check me-2"></i>Rencana
+                                                                        Aksi
+                                                                    </th>
                                                                     <td class="fw-medium text-hijau-kustom">
                                                                         {{ $data->monev?->rencanakerja?->rencana_aksi ?? '-' }}
                                                                     </td>
@@ -181,8 +182,7 @@
                                                                             class="bi bi-card-text me-2"></i>Uraian
                                                                     </th>
                                                                     <td>
-                                                                        <div
-                                                                            class="keterangan-panjang text-hijau-kustom">
+                                                                        <div class="keterangan-panjang text-hijau-kustom">
                                                                             @if ($data->monev && $data->monev->fotoProgres->isNotEmpty())
                                                                                 {{ $data->monev->fotoProgres->first()->deskripsi ?? 'Tidak ada uraian.' }}
                                                                             @else
@@ -229,8 +229,7 @@
                                                                 @foreach ($data->monev->fotoProgres as $foto)
                                                                     <div class="col-12">
                                                                         <a href="{{ asset('storage/' . $foto->foto) }}"
-                                                                            target="_blank"
-                                                                            class="d-block hover-effect">
+                                                                            target="_blank" class="d-block hover-effect">
                                                                             <img src="{{ asset('storage/' . $foto->foto) }}"
                                                                                 alt="Foto Progres"
                                                                                 class="galeri-foto-item">
@@ -267,6 +266,7 @@
     </div>
 @endsection
 @push('scripts')
+    <script src="{{ asset('assets/js/main.js') }}"></script>
     <script>
         // Event listener ini akan berjalan untuk SEMUA modal di halaman
         document.addEventListener('shown.bs.modal', function(event) {

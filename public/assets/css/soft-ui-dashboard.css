@@ -5386,11 +5386,11 @@ fieldset:disabled .btn {
   --bs-card-inner-border-radius: 0.75rem;
   --bs-card-cap-padding-y: 0.5rem;
   --bs-card-cap-padding-x: 1rem;
-  --bs-card-cap-bg: #fff;
+  --bs-card-cap-bg: #fffff7;
   --bs-card-cap-color: ;
   --bs-card-height: ;
   --bs-card-color: ;
-  --bs-card-bg: #fff;
+  --bs-card-bg: #fffff7;
   --bs-card-img-overlay-padding: 1rem;
   --bs-card-group-margin: 0.75rem;
   position: relative;
@@ -28067,117 +28067,140 @@ pre[class*=language-] {
 
 
 
-/* tabel *//* ===========================================
-       1. CONTAINER & SCROLLBAR SETUP
-       =========================================== */
-    .table-container {
-        border: 1px solid #dee2e6;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+/* tabel */
+
+.table-container {
+        border: 1px solid #f0f2f5;
+        /* border-radius: 6px; */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         background: white;
+        overflow: hidden;
     }
 
-    /* Scrollbar Atas (Dummy) */
+    /* Scrollbar Atas */
     .top-scrollbar-container {
         width: 100%;
         overflow-x: auto;
-        height: 15px;
-        background: #f8f9fa;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        border-bottom: 1px solid #dee2e6;
+        height: 12px;
+        background: #fff;
+        border-bottom: 1px solid #f0f2f5;
     }
     
     .top-scrollbar-content {
         height: 1px;
     }
 
-    /* Wrapper Tabel Utama */
+    /* Wrapper Tabel */
     .table-responsive {
-        max-height: 60vh; /* Tinggi maksimal tabel sebelum scroll vertikal muncul */
-        overflow: auto;   /* Aktifkan scroll otomatis (X dan Y) */
+        max-height: 85vh; 
+        overflow: auto;   
+        
         position: relative;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
     }
 
     /* ===========================================
-       2. TABEL STYLING (Blue Theme)
+       2. TABEL STYLING & LEBAR KOLOM
        =========================================== */
     #dataTable {
-        border-collapse: separate; /* Wajib agar sticky bekerja dengan border */
+        border-collapse: separate; 
         border-spacing: 0;
         width: 100%;
+        margin-bottom: 0;
     }
 
-    /* Paksa tabel melebar agar scrollbar muncul */
     #dataTable th, 
     #dataTable td {
-        white-space: nowrap; /* Teks tidak boleh turun baris */
-        vertical-align: middle;
-        padding: 12px 15px; /* Spacing lebih lega */
+        vertical-align: middle; /* Teks di tengah secara vertikal */
+        padding: 12px 16px;
+        border-bottom: 1px solid #f0f2f5;
+        font-size: 0.85rem;
     }
 
-    /* --- STICKY HEADER (Beku di Atas) --- */
+    /* --- PENGATURAN LEBAR KOLOM (PENTING) --- */
+    
+    /* 1. Default: Teks boleh turun ke bawah (Wrap) */
+    #dataTable td {
+        white-space: normal; 
+        min-width: 100px; /* Lebar minimal default agar tidak gepeng */
+    }
+
+    /* 2. Kolom Pendek (No, Tahun, Satuan) */
+    #dataTable .col-short {
+        width: 1%; /* Memaksa kolom sekecil kontennya */
+        white-space: nowrap; /* Jangan turun baris */
+        text-align: center;
+    }
+
+    /* 3. Kolom Sedang (Lokasi, Sumber Dana, Anggaran) */
+    #dataTable .col-medium {
+        min-width: 150px;
+    }
+
+    /* 4. Kolom Panjang (Rencana Aksi, Kegiatan, Sub Kegiatan) */
+    #dataTable .col-long {
+        min-width: 300px; /* Paksa lebar minimal 300px agar tulisan nyaman dibaca */
+    }
+
+    /* ===========================================
+       3. HEADER TRANSPARANCY FIX
+       =========================================== */
     #dataTable thead th {
         position: sticky;
         top: 0;
-        background-color: #2196F3; /* WARNA BIRU SESUAI REFERENSI */
-        color: white;
-        z-index: 10;
+        /* Background SOLID agar tidak transparan */
+        background-color: #d3d3d3; 
+        /* background-image: linear-gradient(135deg, #FF8C42 0%, #FF6B35 100%); */
+        color: #000000 !important;      /* Paksa warna jadi Hitam Pekat */
+        font-weight: 900 !important;
+        z-index: 100; /* Layer tinggi agar menutupi data */
         border-bottom: none;
         text-transform: uppercase;
         font-size: 0.75rem;
+        font-weight: 700;
         letter-spacing: 0.5px;
+        white-space: nowrap; /* Header tetap satu baris */
     }
 
-    /* ===========================================
-       3. STICKY RIGHT COLUMN (Kolom Aksi Beku)
-       =========================================== */
-    
-    /* Header Kolom Terakhir (Aksi) */
-    #dataTable thead th:last-child {
-        position: sticky;
-        right: 0;
-        background-color: #2196F3; /* Harus sama dengan header */
-        z-index: 12; /* Paling TINGGI (di atas header lain & data) */
-        box-shadow: -2px 0 5px rgba(0,0,0,0.1); /* Bayangan pemisah */
+   #dataTable thead th:last-child {
+        position: sticky !important; /* Wajib STICKY agar bisa beku di atas */
+        top: 0 !important;           /* Beku di posisi 0 dari atas */
+        right: auto !important;      /* KUNCINYA: Auto biar TIDAK beku di kanan */
+        left: auto !important;       
+        
+        /* Samakan style dengan header lain */
+        /* background-color: inherit !important;  */
+        z-index: 100 !important;
+        border-left: none !important;
+        box-shadow: none !important;
     }
 
-    /* Data Body Kolom Terakhir (Tombol Aksi) */
+    /* 2. Aturan Body "Aksi" (td) - Tombolnya */
+    /* Yang ini biarkan biasa (static) agar ikut scroll */
     #dataTable tbody td:last-child {
-        position: sticky;
-        right: 0;
-        background-color: #fff; /* Wajib bg putih agar tidak transparan */
-        z-index: 9;
-        box-shadow: -2px 0 5px rgba(0,0,0,0.05);
+        position: static !important; 
+        /* background-color: transparent !important; */
+        border-left: none !important;
+        box-shadow: none !important;
     }
 
-    /* Styling tambahan untuk baris */
-    #dataTable tbody tr:hover td {
-        background-color: #f1f4f9; /* Efek hover baris */
+    /* Hover Effect */
+    #dataTable tbody tr:hover {
+        background-color: #fff8f5;
     }
     
-    /* Fix hover pada sticky column agar warnanya ikut berubah */
-    #dataTable tbody tr:hover td:last-child {
-        background-color: #f1f4f9;
-    }
-
-    /* Styling Scrollbar Browser (Chrome/Safari) */
+    /* Scrollbar Styling */
     .table-responsive::-webkit-scrollbar,
     .top-scrollbar-container::-webkit-scrollbar {
-        height: 10px;
-        width: 10px;
+        height: 10px; width: 10px;
     }
     
     .table-responsive::-webkit-scrollbar-thumb,
     .top-scrollbar-container::-webkit-scrollbar-thumb {
-        background: #c1c1c1;
-        border-radius: 5px;
+        background: #FFB085; border-radius: 6px;
     }
     
     .table-responsive::-webkit-scrollbar-thumb:hover,
     .top-scrollbar-container::-webkit-scrollbar-thumb:hover {
-        background: #a8a8a8;
+        background: #FF8C42;
     }
 /*# sourceMappingURL=dashboard-free.css.map */

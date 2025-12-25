@@ -114,22 +114,33 @@ class RencanaAksiExport implements FromCollection, WithHeadings, WithStyles, Wit
         ];
     }
 
-    public function styles(Worksheet $sheet)
+  public function styles(Worksheet $sheet)
     {
-        // Judul Utama
-        $sheet->mergeCells('A1:N1'); // Sesuaikan dengan jumlah kolom
-        $sheet->setCellValue('A1', 'Rencana Aksi Percepatan pertumbuhan Ekonomi ');
+        // 1. SETUP VARIABEL
+        $lastColumn = 'T'; // Kolom terakhir di Monev adalah T
+        $collection = $this->collection(); 
+        $rowCount = $collection->count();
+        $lastRow = $rowCount > 0 ? (3 + $rowCount) : 3;
+
+        // 2. JUDUL UTAMA (Baris 1)
+        $sheet->mergeCells("A1:{$lastColumn}1");
+        $sheet->setCellValue('A1', 'Monitoring dan Evaluasi Percepatan Pertumbuhan Ekonomi');
         $sheet->getRowDimension(1)->setRowHeight(30);
+        
+        $sheet->getStyle('A1')->applyFromArray([
+            'font' => ['bold' => true, 'size' => 16],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, 
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+            ],
+        ]);
 
-        $lastColumn = $sheet->getHighestColumn();
-        $lastRow = $sheet->getHighestRow();
-
-        // Style untuk semua sel (border dan perataan)
-        $sheet->getStyle("A3:{$lastColumn}{$lastRow}")->applyFromArray([
+        // 3. STYLE GLOBAL (Border & Alignment untuk SEMUA sel)
+        // Kita terapkan ini dulu ke area data agar border rapi
+        $dataRange = "A3:{$lastColumn}{$lastRow}";
+        $sheet->getStyle($dataRange)->applyFromArray([
             'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                ],
+                'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
             ],
             'alignment' => [
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
@@ -137,47 +148,75 @@ class RencanaAksiExport implements FromCollection, WithHeadings, WithStyles, Wit
             ],
         ]);
 
-        // Style Header
+        // 4. STYLE HEADER (Baris 3) - SESUAI PERMINTAAN (ORANGE)
         $headerRange = "A3:{$lastColumn}3";
-        $sheet->getStyle($headerRange)->applyFromArray([
-            'font' => ['bold' => true, 'size' => 11, 'color' => ['argb' => 'FFFFFFFF']],
-            'alignment' => ['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
-            'fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'startColor' => ['argb' => 'FF92D050']],
-        ]);
         $sheet->getRowDimension(3)->setRowHeight(28);
-
-        // Style Judul Utama
-        $sheet->getStyle('A1')->applyFromArray([
-            'font' => ['bold' => true, 'size' => 16],
-            'alignment' => ['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
+        
+        $sheet->getStyle($headerRange)->applyFromArray([
+            'font' => [
+                'bold' => true, 
+                'size' => 11, 
+                'color' => ['argb' => 'FFFFFFFF'] // FONT PUTIH
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => ['argb' => 'FFFF8C42'] // BACKGROUND ORANGE
+            ],
         ]);
 
-        // LOGIKA UNTUK MERGE SEL SECARA OTOMATIS
-        $startRow = 4;
-        $currentRow = $startRow;
-        $collection = $this->collection();
-
-        foreach ($collection as $index => $row) {
-            if (!empty($row['NO'])) {
-                $mergeCount = 0;
-                for ($j = $index + 1; $j < count($collection); $j++) {
-                    if (empty($collection[$j]['NO'])) {
-                        $mergeCount++;
-                    } else {
-                        break;
-                    }
-                }
-
-                if ($mergeCount > 0) {
-                    $endRow = $currentRow + $mergeCount;
-                    // Daftar kolom yang akan di-merge (semua kecuali Anggaran dan Sumber Dana)
-                    $columnsToMerge = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'N'];
-                    foreach ($columnsToMerge as $column) {
-                        $sheet->mergeCells("{$column}{$currentRow}:{$column}{$endRow}");
-                    }
-                }
+        // 5. ALIGNMENT KHUSUS PER KOLOM & MERGE CELL
+        if ($rowCount > 0) {
+            // A. Atur Perataan Teks (Kiri/Tengah)
+            
+            // Kolom Rata Kiri (Untuk Teks Panjang)
+            $leftAlignedColumns = ['B', 'C', 'D', 'E', 'F', 'O', 'P', 'Q', 'T'];
+            foreach ($leftAlignedColumns as $column) {
+                $sheet->getStyle("{$column}4:{$column}{$lastRow}")
+                      ->getAlignment()
+                      ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
             }
-            $currentRow++;
+            
+            // Kolom Rata Tengah (Untuk Angka/Status)
+            $centerAlignedColumns = ['A', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'R', 'S'];
+            foreach ($centerAlignedColumns as $column) {
+                $sheet->getStyle("{$column}4:{$column}{$lastRow}")
+                      ->getAlignment()
+                      ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            }
+
+            // B. Logika Merge Cell Otomatis
+            $currentRow = 4;
+            foreach ($collection as $index => $row) {
+                // Cek apakah ini baris induk (punya Nomor)
+                if (!empty($row['No'])) {
+                    $mergeCount = 0;
+                    // Hitung baris anak di bawahnya
+                    for ($j = $index + 1; $j < $rowCount; $j++) {
+                        if (empty($collection[$j]['No'])) {
+                            $mergeCount++;
+                        } else {
+                            break;
+                        }
+                    }
+
+                    // Lakukan Merge jika ada anak
+                    if ($mergeCount > 0) {
+                        $endRow = $currentRow + $mergeCount;
+                        
+                        // Daftar kolom yang AKAN di-merge 
+                        // (KITA SKIP KOLOM 'J' dan 'K' yaitu Anggaran & Sumber Dana agar tidak menyatu)
+                        $columnsToMerge = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
+                        
+                        foreach ($columnsToMerge as $column) {
+                            $sheet->mergeCells("{$column}{$currentRow}:{$column}{$endRow}");
+                        }
+                    }
+                }
+                $currentRow++;
+            }
         }
     }
 

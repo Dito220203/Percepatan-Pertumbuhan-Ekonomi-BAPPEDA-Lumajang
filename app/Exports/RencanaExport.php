@@ -122,16 +122,33 @@ class RencanaExport implements FromCollection, WithHeadings, WithStyles, WithTit
 
     public function styles(Worksheet $sheet)
     {
-        $sheet->mergeCells('A1:O1');
-        $sheet->setCellValue('A1', 'Rencana Kegiatan Percepatan pertumbuhan Ekonomi');
-        $sheet->getRowDimension(1)->setRowHeight(30);
-
-        $collection = $this->collection();
+        // 1. SETUP VARIABEL
+        $lastColumn = 'O'; // Kolom terakhir di Rencana Kegiatan adalah O
+        $collection = $this->collection(); 
         $rowCount = count($collection);
         $lastRow = $rowCount > 0 ? (3 + $rowCount) : 3;
-        $lastColumn = 'O';
 
-        $sheet->getStyle("A3:{$lastColumn}{$lastRow}")->applyFromArray([
+        // 2. JUDUL UTAMA (Baris 1)
+        $sheet->mergeCells("A1:{$lastColumn}1");
+        $sheet->setCellValue('A1', 'Rencana Kegiatan Percepatan Pertumbuhan Ekonomi');
+        $sheet->getRowDimension(1)->setRowHeight(35);
+        
+        $sheet->getStyle('A1')->applyFromArray([
+            'font' => ['bold' => true, 'size' => 16, 'color' => ['argb' => 'FF333333']],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, 
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => ['argb' => 'FFE0E0E0'] // BACKGROUND ABU-ABU
+            ],
+        ]);
+
+        // 3. STYLE GLOBAL (Border & Alignment untuk SEMUA sel data)
+        // Kita terapkan ini dulu ke area data agar border rapi dan tidak menimpa warna header
+        $dataRange = "A3:{$lastColumn}{$lastRow}";
+        $sheet->getStyle($dataRange)->applyFromArray([
             'borders' => [
                 'allBorders' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
             ],
@@ -141,44 +158,67 @@ class RencanaExport implements FromCollection, WithHeadings, WithStyles, WithTit
             ],
         ]);
 
+        // 4. STYLE HEADER (Baris 3) - PERBAIKAN WARNA DISINI
         $headerRange = "A3:{$lastColumn}3";
+        $sheet->getRowDimension(3)->setRowHeight(30);
+        
         $sheet->getStyle($headerRange)->applyFromArray([
-            'font' => ['bold' => true, 'size' => 11, 'color' => ['argb' => 'FF92D050']],
-            'alignment' => ['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
-            'fill' => ['fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'startColor' => ['argb' => 'FF4F81BD']],
+            'font' => [
+                'bold' => true, 
+                'size' => 11, 
+                'color' => ['argb' => 'FFFFFFFF'] // FONT PUTIH
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER
+            ],
+            'fill' => [
+                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                'startColor' => ['argb' => 'FFFF8C42'] // BACKGROUND ORANGE (Sesuai Tema)
+            ],
         ]);
-        $sheet->getRowDimension(3)->setRowHeight(28);
 
-        $sheet->getStyle('A1')->applyFromArray([
-            'font' => ['bold' => true, 'size' => 16],
-            'alignment' => ['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
-        ]);
-
+        // 5. ALIGNMENT KHUSUS PER KOLOM & MERGE CELL
         if ($rowCount > 0) {
-            // =============================================================
-            // PERBAIKAN: Menggunakan sintaks range yang benar "A4:A{$lastRow}"
-            // =============================================================
+            
+            // Kolom Rata Kiri (Untuk Teks Panjang)
             $leftAlignedColumns = ['B', 'C', 'D', 'E', 'F'];
             foreach ($leftAlignedColumns as $column) {
-                $sheet->getStyle("{$column}4:{$column}{$lastRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                $sheet->getStyle("{$column}4:{$column}{$lastRow}")
+                      ->getAlignment()
+                      ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
             }
+            
+            // Kolom Rata Tengah (Untuk Angka/Status)
             $centerAlignedColumns = ['A', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
             foreach ($centerAlignedColumns as $column) {
-                $sheet->getStyle("{$column}4:{$column}{$lastRow}")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $sheet->getStyle("{$column}4:{$column}{$lastRow}")
+                      ->getAlignment()
+                      ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
             }
 
-            // LOGIKA MERGE SEL
+            // LOGIKA MERGE CELL OTOMATIS
             $currentRow = 4;
             foreach ($collection as $index => $row) {
+                // Cek apakah ini baris induk (punya Nomor)
                 if (!empty($row['NO'])) {
                     $mergeCount = 0;
+                    // Hitung baris anak di bawahnya
                     for ($j = $index + 1; $j < $rowCount; $j++) {
-                        if (empty($collection[$j]['NO'])) $mergeCount++;
-                        else break;
+                        if (empty($collection[$j]['NO'])) {
+                            $mergeCount++;
+                        } else {
+                            break;
+                        }
                     }
+
+                    // Lakukan Merge jika ada anak
                     if ($mergeCount > 0) {
                         $endRow = $currentRow + $mergeCount;
+                        
+                        // Daftar kolom yang AKAN di-merge 
+                        // (KITA SKIP KOLOM J & K yaitu Anggaran & Sumber Dana agar tidak menyatu)
                         $columnsToMerge = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'N', 'O'];
+                        
                         foreach ($columnsToMerge as $column) {
                             $sheet->mergeCells("{$column}{$currentRow}:{$column}{$endRow}");
                         }

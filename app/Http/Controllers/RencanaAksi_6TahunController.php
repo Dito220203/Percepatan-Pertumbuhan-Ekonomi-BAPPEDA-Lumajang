@@ -59,7 +59,7 @@ class RencanaAksi_6TahunController extends Controller
         $tahun = $request->input('tahun');
 
         // Kirim nilai 'tahun' ke class RencanaAksiExport
-        return Excel::download(new RencanaAksiExport($tahun), 'rencana_aksi.xlsx');
+        return Excel::download(new RencanaAksiExport($tahun), 'rencana_aksi_percepatan_pertumbuhan_ekonomi.xlsx');
     }
     /**
      * Store a newly created resource in storage.

@@ -47,27 +47,27 @@
                     </div>
                     {{-- Akhir Modifikasi Tombol --}}
 
-                    <div class="card-body px-0 pt-0 pb-2">
+                    <div class="card-body">
                         <div class="table-container">
                             <div class="top-scrollbar-container">
                                 <div class="top-scrollbar-content"></div>
                             </div>
                             <div class="table-responsive">
-                                <table id="dataTable" class="table align-items-center mb-0">
+                                <table id="dataTable" class="table align-items-center ">
                                     <thead>
                                         <tr>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                                                class="text-center text-uppercase  font-weight-bolder">
                                                 No
                                             </th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase  font-weight-bolder ps-5">
                                                 Program</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercases font-weight-bolder ps-5">
                                                 Strategi</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                                                class="text-center text-uppercase  font-weight-bolder">
                                                 Aksi</th>
                                         </tr>
                                     </thead>
@@ -283,5 +283,4 @@
 @endsection
 @push('scripts')
     <script src="{{ asset('assets/js/main.js') }}"></script>
-    {{-- Pastikan path asset-nya benar sesuai lokasi file kamu --}}
 @endpush

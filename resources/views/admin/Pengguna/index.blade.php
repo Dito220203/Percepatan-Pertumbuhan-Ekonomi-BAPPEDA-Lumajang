@@ -50,26 +50,26 @@
                     </div>
                     {{-- Akhir Modifikasi Tombol --}}
 
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table id="dataTable" class="table align-items-center mb-0">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="dataTable" class="table ">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                                        <th class="text-center text-uppercase font-weight-bolder">
                                             No
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-uppercase font-weight-bolder ps-5">
                                             Username</th>
 
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-uppercase font-weight-bolder ps-5">
                                             Perangkat Daerah</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-uppercase font-weight-bolder ps-5">
                                             Level</th>
 
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                                        <th class="text-uppercase font-weight-bolder ps-5">
                                             Aksi</th>
                                     </tr>
                                 </thead>

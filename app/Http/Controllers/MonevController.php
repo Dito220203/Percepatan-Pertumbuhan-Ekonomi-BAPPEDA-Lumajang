@@ -231,9 +231,9 @@ class MonevController extends Controller
         $tahun = $request->input('tahun');
 
         // Tentukan nama file
-        $fileName = 'laporan_monev.xlsx';
+        $fileName = 'laporan_monev_percepatan_pertumbuhan_ekonomi.xlsx';
         if ($tahun) {
-            $fileName = 'laporan_monev_' . $tahun . '.xlsx';
+            $fileName = 'laporan_monev_percepatan_pertumbuhan_ekonomi_' . $tahun . '.xlsx';
         }
 
         // Panggil class Export dengan parameter user dan tahun
@@ -285,7 +285,7 @@ class MonevController extends Controller
         )->setPaper('a4', 'landscape');
 
         // Beri nama file yang dinamis dan download
-        $fileName = 'laporan_monev' . ($selectedTahun ? '_' . $selectedTahun : '') . '.pdf';
+        $fileName = 'laporan_monev_percepatan_pertumbuhan_ekonomi' . ($selectedTahun ? '_' . $selectedTahun : '') . '.pdf';
         return $pdf->download($fileName);
     }
 

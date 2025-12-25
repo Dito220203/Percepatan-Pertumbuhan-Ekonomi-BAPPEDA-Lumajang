@@ -146,7 +146,7 @@
                         <div class="row">
                             <div class="col-8 text-start">
                                 <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                    <i class="fa-solid fa-tasks text-lg opacity-10" aria-hidden="true"></i>
+                                    <i class="fa-solid fa-bars-progress text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                                 <h5 class="text-white font-weight-bolder mb-0 mt-3">
                                     {{ $totalprogres }}

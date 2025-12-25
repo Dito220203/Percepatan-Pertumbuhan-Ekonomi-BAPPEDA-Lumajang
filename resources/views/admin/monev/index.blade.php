@@ -119,347 +119,336 @@
                         </div>
                     </div>
 
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table id="dataTable" class="table align-items-center mb-0">
-                                @php
-                                    $adaPesan = $monev->contains(function ($item) {
-                                        return !empty($item->pesan);
-                                    });
-                                @endphp
-                                <thead>
-                                    <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
-                                            No</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Strategi</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Rencana Aksi / Aktivitas</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Sub Kegiatan</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Kegiatan</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Program</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Lokasi</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Volume Target</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Satuan</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Tahun</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Perangkat Daerah</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Anggaran</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Sumber Dana</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Status</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Dokumen Anggaran</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Realisasi Anggaran</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Volume Realisasi</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Satuan Volume</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Keterangan</th>
-                                        @if ($adaPesan)
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Catatan</th>
-                                        @endif
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Dokumentasi</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="dataTabelBody">
-                                    @foreach ($monev as $data)
-                                        <tr id="row-{{ $data->id }}">
-                                            <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->subprogram->subprogram ?? '-' }}
-                                            </td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->rencanakerja->rencana_aksi ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->rencanakerja->sub_kegiatan ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->rencanakerja->kegiatan ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->rencanakerja->nama_program ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->rencanakerja->lokasi ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->rencanakerja->volume ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->rencanakerja->satuan ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->rencanakerja->tahun ?? '-' }}</td>
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                {{ $data->opd->nama ?? '-' }}
-                                            </td>
-                                            @php
-                                                $anggarans = explode('; ', $data->anggaran);
-                                                $sumberdanas = explode('; ', $data->sumberdana);
-                                            @endphp
-
-                                            {{-- Cek untuk Kolom Anggaran --}}
-                                            @if (count($anggarans) > 1)
-                                                {{-- Jika data lebih dari satu, gunakan tampilan multi-baris --}}
-                                                <td>
-                                                    @foreach ($anggarans as $anggaran)
-                                                        <div>{{ $anggaran ?: '-' }}</div>
-                                                    @endforeach
-                                                </td>
-                                            @else
-                                                {{-- Jika data hanya satu, tampilkan seperti biasa --}}
-                                                <td class="text-sm font-weight-bold mb-0">{{ $data->anggaran ?: '-' }}
-                                                </td>
-                                            @endif
-
-                                            {{-- Cek untuk Kolom Sumber Dana --}}
-                                            @if (count($sumberdanas) > 1)
-                                                {{-- Jika data lebih dari satu, gunakan tampilan multi-baris --}}
-                                                <td>
-                                                    @foreach ($sumberdanas as $sumber)
-                                                        <div>{{ $sumber ?: '-' }}</div>
-                                                    @endforeach
-                                                </td>
-                                            @else
-                                                {{-- Jika data hanya satu, tampilkan seperti biasa --}}
-                                                <td class="text-sm font-weight-bold mb-0">{{ $data->sumberdana ?: '-' }}
-                                                </td>
-                                            @endif
-
-
-                                            {{-- kolom status --}}
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                @if ($data->status === 'Valid')
-                                                    <span class="badge bg-success">{{ $data->status }}</span>
-                                                @else
-                                                    <span class="badge bg-secondary">{{ $data->status }}</span>
-                                                @endif
-                                            </td>
-
-                                            @php
-                                                // Definisikan array pemetaan angka ke Romawi di sini
-                                                // Indeks 0 sengaja dikosongkan agar $romanMap[1] menjadi 'I'
-                                                $romanMap = ['', 'I', 'II', 'III', 'IV'];
-                                            @endphp
-
-                                            {{-- Kolom Dokumen Anggaran (Tidak perlu diubah, sudah benar) --}}
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                @forelse (($data->dokumen_anggaran ?? []) as $status)
-                                                    @if ($status && str_contains($status, 'ADA'))
-                                                        <span
-                                                            class="badge bg-success d-block mb-1">{{ $status }}</span>
-                                                    @elseif ($status)
-                                                        <span
-                                                            class="badge bg-danger d-block mb-1">{{ $status }}</span>
-                                                    @endif
-                                                @empty
-                                                    <span>-</span>
-                                                @endforelse
-                                            </td>
-
-                                            {{-- Kolom Realisasi (Diperbaiki dengan Flexbox) --}}
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                @if (is_array($data->realisasi))
-                                                    @foreach ($data->realisasi as $triwulan => $nilai)
-                                                        @if ($nilai)
-                                                            {{-- Bungkus setiap baris dengan div dan gunakan flex --}}
-                                                            <div style="display: flex; align-items: baseline;">
-                                                                {{-- Atur lebar tetap untuk label --}}
-                                                                <span style="width: 55px; display: inline-block;">
-                                                                    TW {{ $romanMap[$triwulan] ?? $triwulan }}
-                                                                </span>
-                                                                <span>:</span>
-                                                                {{-- Beri sedikit jarak kiri --}}
-                                                                <span style="margin-left: 5px;">{{ $nilai }}</span>
-
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                @else
-                                                    {{ $data->realisasi }}
-                                                @endif
-                                            </td>
-
-                                            {{-- Kolom Volume realisasi (Diperbaiki dengan Flexbox) --}}
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                @if (is_array($data->volumeTarget))
-                                                    @foreach ($data->volumeTarget as $triwulan => $nilai)
-                                                        @if ($nilai)
-                                                            <div style="display: flex; align-items: baseline;">
-                                                                <span style="width: 55px; display: inline-block;">
-                                                                    TW {{ $romanMap[$triwulan] ?? $triwulan }}
-                                                                </span>
-                                                                <span>:</span>
-                                                                <span style="margin-left: 5px;">{{ $nilai }}</span>
-
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                @else
-                                                    {{ $data->volumeTarget }}
-                                                @endif
-                                            </td>
-
-                                            {{-- Kolom Satuan Realisasi (Diperbaiki dengan Flexbox) --}}
-                                            <td>
-                                                @if (is_array($data->satuan_realisasi))
-                                                    @foreach ($data->satuan_realisasi as $triwulan => $nilai)
-                                                        @if ($nilai)
-                                                            <div style="display: flex; align-items: baseline;">
-                                                                <span style="width: 55px; display: inline-block;">
-                                                                    TW {{ $romanMap[$triwulan] ?? $triwulan }}
-                                                                </span>
-                                                                <span>:</span>
-                                                                <span style="margin-left: 5px;">{{ $nilai }}</span>
-
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                @else
-                                                    {{ $data->satuan_realisasi }}
-                                                @endif
-                                            </td>
-                                            {{-- kolom uraian --}}
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                @if (is_array($data->uraian))
-                                                    @foreach ($data->uraian as $triwulan => $nilai)
-                                                        @if ($nilai)
-                                                            <div style="display: flex; align-items: baseline;">
-                                                                <span style="width: 55px; display: inline-block;">
-                                                                    TW {{ $romanMap[$triwulan] ?? $triwulan }}
-                                                                </span>
-                                                                <span>:</span>
-                                                                <span style="margin-left: 5px;">{{ $nilai }}</span>
-
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                @else
-                                                    {{ $data->uraian }}
-                                                @endif
-                                            </td>
+                    <div class="card-body">
+                        <div class="table-container">
+                            <div class="top-scrollbar-container">
+                                <div class="top-scrollbar-content"></div>
+                            </div>
+                            <div class="table-responsive ">
+                                <table id="dataTable" class="table align-items-center ">
+                                    @php
+                                        $adaPesan = $monev->contains(function ($item) {
+                                            return !empty($item->pesan);
+                                        });
+                                    @endphp
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center text-uppercase font-weight-bolder">
+                                                No</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Strategi</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Rencana Aksi / Aktivitas</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5 col-medium">
+                                                Sub Kegiatan</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5 col-long">
+                                                Kegiatan</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Program</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Lokasi</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Volume Target</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Satuan</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Tahun</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Perangkat Daerah</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5 col-long">
+                                                Anggaran</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Sumber Dana</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Status</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Dokumen Anggaran</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5 col-long">
+                                                Realisasi Anggaran</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Volume Realisasi</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Satuan Volume</th>
+                                            <th class="text-uppercase font-weight-bolder ps-5">
+                                                Keterangan</th>
                                             @if ($adaPesan)
-                                                <td class="text-sm font-weight-bold mb-0">{{ $data->pesan }}</td>
+                                                <th class="text-uppercase font-weight-bolder ps-5">
+                                                    Catatan</th>
                                             @endif
+                                            <th class="text-center text-uppercase font-weight-bolder ps-5">
+                                                Dokumentasi</th>
+                                            <th class="text-center text-uppercase font-weight-bolder ps-5">
+                                                Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dataTabelBody">
+                                        @foreach ($monev as $data)
+                                            <tr id="row-{{ $data->id }}">
+                                                <td class="text-center">{{ $loop->iteration }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->subprogram->subprogram ?? '-' }}
+                                                </td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->rencanakerja->rencana_aksi ?? '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->rencanakerja->sub_kegiatan ?? '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->rencanakerja->kegiatan ?? '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->rencanakerja->nama_program ?? '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->rencanakerja->lokasi ?? '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->rencanakerja->volume ?? '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->rencanakerja->satuan ?? '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->rencanakerja->tahun ?? '-' }}</td>
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    {{ $data->opd->nama ?? '-' }}
+                                                </td>
+                                                @php
+                                                    $anggarans = explode('; ', $data->anggaran);
+                                                    $sumberdanas = explode('; ', $data->sumberdana);
+                                                @endphp
 
-                                            {{-- Tombol Lihat Dokumentasi --}}
-                                            <td class="text-sm font-weight-bold mb-0">
-                                                <button type="button" class="btn btn-tambah-utama "
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#ModalDetailProduk{{ $data->id }}">
-                                                    Lihat Dokumentasi
-                                                </button>
-                                            </td>
+                                                {{-- Cek untuk Kolom Anggaran --}}
+                                                @if (count($anggarans) > 1)
+                                                    {{-- Jika data lebih dari satu, gunakan tampilan multi-baris --}}
+                                                    <td>
+                                                        @foreach ($anggarans as $anggaran)
+                                                            <div>{{ $anggaran ?: '-' }}</div>
+                                                        @endforeach
+                                                    </td>
+                                                @else
+                                                    {{-- Jika data hanya satu, tampilkan seperti biasa --}}
+                                                    <td class="text-sm font-weight-bold mb-0">{{ $data->anggaran ?: '-' }}
+                                                    </td>
+                                                @endif
+
+                                                {{-- Cek untuk Kolom Sumber Dana --}}
+                                                @if (count($sumberdanas) > 1)
+                                                    {{-- Jika data lebih dari satu, gunakan tampilan multi-baris --}}
+                                                    <td>
+                                                        @foreach ($sumberdanas as $sumber)
+                                                            <div>{{ $sumber ?: '-' }}</div>
+                                                        @endforeach
+                                                    </td>
+                                                @else
+                                                    {{-- Jika data hanya satu, tampilkan seperti biasa --}}
+                                                    <td class="text-sm font-weight-bold mb-0">
+                                                        {{ $data->sumberdana ?: '-' }}
+                                                    </td>
+                                                @endif
 
 
-
-
-
-
-                                            <td class="text-center align-middle">
-                                                <div class="d-flex justify-content-center gap-1">
-                                                    <button type="button" class="btn btn-success btn-sm"
-                                                        data-bs-toggle="modal" data-bs-target="#uploadFotoModal"
-                                                        data-id="{{ $data->id }}">
-                                                        <i class="fas fa-camera"></i> Upload
-                                                    </button>
-
-                                                    @if ($data->is_locked)
-                                                        {{-- Jika terkunci, tombol dinonaktifkan --}}
-                                                        <button type="button" class="btn btn-secondary btn-sm"
-                                                            onclick="showLockedAlert()">
-                                                            <i class="fas fa-lock"></i> Edit/Lengkapi
-                                                        </button>
+                                                {{-- kolom status --}}
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    @if ($data->status === 'Valid')
+                                                        <span class="badge bg-success">{{ $data->status }}</span>
                                                     @else
-                                                        {{-- Jika tidak terkunci, tombol berfungsi normal --}}
-                                                        <form action="{{ route('monev.edit', $data->id) }}"
-                                                            method="GET" style="display:inline;">
-                                                            <button class="btn btn-primary">
-                                                                <i class="fas fa-edit"></i> Edit/Lengkapi
+                                                        <span class="badge bg-secondary">{{ $data->status }}</span>
+                                                    @endif
+                                                </td>
+
+                                                @php
+                                                    // Definisikan array pemetaan angka ke Romawi di sini
+                                                    // Indeks 0 sengaja dikosongkan agar $romanMap[1] menjadi 'I'
+                                                    $romanMap = ['', 'I', 'II', 'III', 'IV'];
+                                                @endphp
+
+                                                {{-- Kolom Dokumen Anggaran (Tidak perlu diubah, sudah benar) --}}
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    @forelse (($data->dokumen_anggaran ?? []) as $status)
+                                                        @if ($status && str_contains($status, 'ADA'))
+                                                            <span
+                                                                class="badge bg-success d-block mb-1">{{ $status }}</span>
+                                                        @elseif ($status)
+                                                            <span
+                                                                class="badge bg-danger d-block mb-1">{{ $status }}</span>
+                                                        @endif
+                                                    @empty
+                                                        <span>-</span>
+                                                    @endforelse
+                                                </td>
+
+                                                {{-- Kolom Realisasi (Diperbaiki dengan Flexbox) --}}
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    @if (is_array($data->realisasi))
+                                                        @foreach ($data->realisasi as $triwulan => $nilai)
+                                                            @if ($nilai)
+                                                                {{-- Bungkus setiap baris dengan div dan gunakan flex --}}
+                                                                <div style="display: flex; align-items: baseline;">
+                                                                    {{-- Atur lebar tetap untuk label --}}
+                                                                    <span style="width: 55px; display: inline-block;">
+                                                                        TW {{ $romanMap[$triwulan] ?? $triwulan }}
+                                                                    </span>
+                                                                    <span>:</span>
+                                                                    {{-- Beri sedikit jarak kiri --}}
+                                                                    <span
+                                                                        style="margin-left: 5px;">{{ $nilai }}</span>
+
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    @else
+                                                        {{ $data->realisasi }}
+                                                    @endif
+                                                </td>
+
+                                                {{-- Kolom Volume realisasi (Diperbaiki dengan Flexbox) --}}
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    @if (is_array($data->volumeTarget))
+                                                        @foreach ($data->volumeTarget as $triwulan => $nilai)
+                                                            @if ($nilai)
+                                                                <div style="display: flex; align-items: baseline;">
+                                                                    <span style="width: 55px; display: inline-block;">
+                                                                        TW {{ $romanMap[$triwulan] ?? $triwulan }}
+                                                                    </span>
+                                                                    <span>:</span>
+                                                                    <span
+                                                                        style="margin-left: 5px;">{{ $nilai }}</span>
+
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    @else
+                                                        {{ $data->volumeTarget }}
+                                                    @endif
+                                                </td>
+
+                                                {{-- Kolom Satuan Realisasi (Diperbaiki dengan Flexbox) --}}
+                                                <td>
+                                                    @if (is_array($data->satuan_realisasi))
+                                                        @foreach ($data->satuan_realisasi as $triwulan => $nilai)
+                                                            @if ($nilai)
+                                                                <div style="display: flex; align-items: baseline;">
+                                                                    <span style="width: 55px; display: inline-block;">
+                                                                        TW {{ $romanMap[$triwulan] ?? $triwulan }}
+                                                                    </span>
+                                                                    <span>:</span>
+                                                                    <span
+                                                                        style="margin-left: 5px;">{{ $nilai }}</span>
+
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    @else
+                                                        {{ $data->satuan_realisasi }}
+                                                    @endif
+                                                </td>
+                                                {{-- kolom uraian --}}
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    @if (is_array($data->uraian))
+                                                        @foreach ($data->uraian as $triwulan => $nilai)
+                                                            @if ($nilai)
+                                                                <div style="display: flex; align-items: baseline;">
+                                                                    <span style="width: 55px; display: inline-block;">
+                                                                        TW {{ $romanMap[$triwulan] ?? $triwulan }}
+                                                                    </span>
+                                                                    <span>:</span>
+                                                                    <span
+                                                                        style="margin-left: 5px;">{{ $nilai }}</span>
+
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    @else
+                                                        {{ $data->uraian }}
+                                                    @endif
+                                                </td>
+                                                @if ($adaPesan)
+                                                    <td class="text-sm font-weight-bold mb-0">{{ $data->pesan }}</td>
+                                                @endif
+
+                                                {{-- Tombol Lihat Dokumentasi --}}
+                                                <td class="text-sm font-weight-bold mb-0">
+                                                    <button type="button" class="btn btn-tambah-utama "
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#ModalDetailProduk{{ $data->id }}">
+                                                        Lihat Dokumentasi
+                                                    </button>
+                                                </td>
+
+
+
+
+
+
+                                                <td class="text-center align-middle">
+                                                    <div class="d-flex justify-content-center gap-1">
+                                                        <button type="button" class="btn btn-success btn-sm"
+                                                            data-bs-toggle="modal" data-bs-target="#uploadFotoModal"
+                                                            data-id="{{ $data->id }}">
+                                                            <i class="fas fa-camera"></i> Upload
+                                                        </button>
+
+                                                        @if ($data->is_locked)
+                                                            {{-- Jika terkunci, tombol dinonaktifkan --}}
+                                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                                onclick="showLockedAlert()">
+                                                                <i class="fas fa-lock"></i> Edit/Lengkapi
+                                                            </button>
+                                                        @else
+                                                            {{-- Jika tidak terkunci, tombol berfungsi normal --}}
+                                                            <form action="{{ route('monev.edit', $data->id) }}"
+                                                                method="GET" style="display:inline;">
+                                                                <button class="btn btn-primary">
+                                                                    <i class="fas fa-edit"></i> Edit/Lengkapi
+                                                                </button>
+                                                            </form>
+                                                        @endif
+                                                        @push('scripts')
+                                                            <script src="{{ asset('js/kunciMonev.js') }}"></script>
+                                                        @endpush
+
+                                                        @if (auth()->guard('pengguna')->user()->level == 'Super Admin')
+                                                            <button
+                                                                class="btn btn-sm {{ $data->status == 'Valid' ? 'btn-warning' : 'btn-success' }}"
+                                                                onclick="updateStatus('{{ $data->id }}', '{{ $data->status }}')">
+                                                                @if ($data->status == 'Valid')
+                                                                    Batalkan
+                                                                @else
+                                                                    Validasi
+                                                                @endif
+                                                            </button>
+
+                                                            <form id="form-status-{{ $data->id }}"
+                                                                action="{{ route('monev.validasi', $data->id) }}"
+                                                                method="POST" style="display:none;">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <input type="hidden" name="status" value="">
+                                                            </form>
+                                                            <button type="button" class="btn btn-tambah-utama "
+                                                                data-bs-toggle="modal" data-bs-target="#modalPesan"
+                                                                data-id="{{ $data->id }}"
+                                                                data-pesan="{{ $data->pesan ?? '' }}">
+                                                                <i class="fa-solid fa-envelope"></i>
+                                                            </button>
+                                                        @endif
+
+
+
+                                                        {{-- Tombol Delete --}}
+                                                        <form id="formDelete-{{ $data->id }}"
+                                                            action="{{ route('monev.delete', $data->id) }}"
+                                                            method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" class="btn btn-danger"
+                                                                onclick="confirmDelete('{{ $data->id }}')">
+                                                                <i class="fa-solid fa-trash"></i>
                                                             </button>
                                                         </form>
-                                                    @endif
-                                                    @push('scripts')
-                                                        <script src="{{ asset('js/kunciMonev.js') }}"></script>
-                                                    @endpush
 
-                                                    @if (auth()->guard('pengguna')->user()->level == 'Super Admin')
-                                                        <button
-                                                            class="btn btn-sm {{ $data->status == 'Valid' ? 'btn-warning' : 'btn-success' }}"
-                                                            onclick="updateStatus('{{ $data->id }}', '{{ $data->status }}')">
-                                                            @if ($data->status == 'Valid')
-                                                                Batalkan
-                                                            @else
-                                                                Validasi
-                                                            @endif
-                                                        </button>
-
-                                                        <form id="form-status-{{ $data->id }}"
-                                                            action="{{ route('monev.validasi', $data->id) }}"
-                                                            method="POST" style="display:none;">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <input type="hidden" name="status" value="">
-                                                        </form>
-                                                        <button type="button" class="btn btn-tambah-utama "
-                                                            data-bs-toggle="modal" data-bs-target="#modalPesan"
-                                                            data-id="{{ $data->id }}"
-                                                            data-pesan="{{ $data->pesan ?? '' }}">
-                                                            <i class="fa-solid fa-envelope"></i>
-                                                        </button>
-                                                    @endif
-
-
-
-                                                    {{-- Tombol Delete --}}
-                                                    <form id="formDelete-{{ $data->id }}"
-                                                        action="{{ route('monev.delete', $data->id) }}" method="POST"
-                                                        style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" class="btn btn-danger"
-                                                            onclick="confirmDelete('{{ $data->id }}')">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </form>
-
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="card-footer py-3">
                             <div class="row align-items-center">
@@ -759,6 +748,7 @@
     </div>
 
     @push('scripts')
+        <script src="{{ asset('assets/js/main.js') }}"></script>
         {{-- Script untuk auto-submit filter tahun --}}
         <script>
             $(document).ready(function() {
